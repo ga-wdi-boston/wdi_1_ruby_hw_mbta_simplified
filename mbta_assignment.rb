@@ -6,3 +6,11 @@ green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arli
 
 orange_line = ["North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
 
+
+# Get journey's start and final destination
+puts "enter jourey origin"
+origin = gets.chomp
+
+puts "enter final destination"
+destination = gets.chomp
+
