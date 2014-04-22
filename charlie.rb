@@ -59,9 +59,9 @@
 #Define subway system
 red_line = ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendal/MIT", "Park Street", "South Station"]
 
-green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
+green_line = ["Blank1", "Blank2", "Blank3", "Blank4", "Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
 
-orange_line = ["North Station", "Haymarket", "Park Street","State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
+orange_line = ["Blank1", "Blank2", "Blank3", "Blank4", "North Station", "Haymarket", "Park Street","State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
 
 t_lines = {
       color: "Red",
@@ -71,26 +71,40 @@ t_lines = {
 
 # Asks for station origin
 print "Please enter the name of your station of origin:"
-origin = gets.chomp
+origin_station = gets.chomp
 
-print "Please enter the color (Red, Green or Orange) of the train line #{origin} is on:"
-train_line = gets.chomp
+print "Please enter the color (Red, Green or Orange) of the train line #{origin_station} is on:"
+origin_train_line = gets.chomp
 
 
 #Asks for destination
-print "Please enter the name of your destination:"
-destination = gets.chomp
+print "Please enter the name of your destination station:"
+destination_station = gets.chomp
 
-print "Please enter the color (Red, Green or Orange) of the train line #{origin} is on:"
-train_line2 = gets.chomp
+print "Please enter the color (Red, Green or Orange) of the train line #{destination_station} is on:"
+destination_train_line = gets.chomp
 
-# Calculate difference between destinations on same line
-if train_line == "Red"
-    train_line = red_line
-elsif train_line == "Green"
-    train_line = green_line
+# Assigned the given train line to the appropriate array
+#Calculate difference between destinations on same line
+if origin_train_line == "Red"
+    origin_train_line = red_line
+elsif origin_train_line_== "Green"
+    origin_train_line = green_line
 else
-    train_line = orange_line
+    origin_train_line = orange_line
 end
 
-print "Your journey is " + ( red_line.index(destination) - red_line.index(origin) ).to_s  + " stops long."
+if destination_train_line == "Red"
+    destination_train_line = red_line
+elsif destination_train_line == "Green"
+    destination_train_line = green_line
+else
+    destination_train_line = orange_line
+end
+
+print "Your journey is #{destination_train_line.index(destination_station) - origin_train_line.index(origin_station)} stops long."
+
+
+
+
+
