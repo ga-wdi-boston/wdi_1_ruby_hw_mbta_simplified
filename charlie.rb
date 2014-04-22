@@ -40,27 +40,42 @@ puts "Welcome to the MBTA!"
 print "Starting Point: "
 origin = gets.chomp.capitalize
 
-# Validation
+
+=begin
+# Validation to clarify which Haymarket
 if origin == "Haymarket"
-  print "Are you on the red line or orange line? "
+  print "Are you on the green line or orange line? "
   line = gets.chomp.downcase
 end
 
-if line.include?("red")
-  origin = "Haymarket_Red"
+if line.include?("green")
+  origin = "Haymarket_Green"
+  green_line[0] = "Haymarket_Green"  # will not work if order change
 elsif line.include?("orange")
   origin = "Haymarket_Orange"
+  orange_line[1] = "Haymarket_Orange" # will not work if order change
 end
-
-
-
+=end
 
 
 # User selects destination
 print "Destination: "
 destination = gets.chomp.capitalize
 
-# SUM this:
+start_num = red_line.index(origin)
+finish_num = red_line.index(destination)
+stops = (finish_num - start_num).abs
+
+puts stops
+
+# If staying on the same line:
+
+
+
+
+
+
+# SUM this for multiple lines:
 
   # Figure out distance from origin to "Park Street"
   # Figure out distance from Park Street to destination
