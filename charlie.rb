@@ -37,7 +37,29 @@ subway = [red_line, green_line, orange_line]
 
 # User selects origin => need to select line as well!
 puts "Welcome to the MBTA!"
-print "Starting Point: "
+print "What line are you riding? "
+
+while true
+
+  line = gets.chomp.downcase
+
+  if line.include?("red")
+    line = red_line
+    break
+  elsif line.include?("orange")
+    line = orange_line
+    break
+  elsif line.include?("green")
+    line = green_line
+    break
+  else
+    puts "Are you sure you're in Boston? We don't have that line!"
+    print "Please select the red line, green line or orange line. "
+  end
+
+end
+
+print "Starting Station: "
 origin = gets.chomp.downcase
 
 
@@ -62,8 +84,11 @@ end
 print "Destination: "
 destination = gets.chomp.downcase
 
-start_num = red_line.index(origin)
-finish_num = red_line.index(destination)
+# Assign number for locations
+start_num = line.index(origin)
+finish_num = line.index(destination)
+
+# Subtract location numbers to find stop difference
 stops = (finish_num - start_num).abs
 
 puts stops
@@ -88,4 +113,4 @@ puts stops
 
 
 # Intersection for all three lines
-puts red_line & green_line & orange_line
+# puts red_line & green_line & orange_line
