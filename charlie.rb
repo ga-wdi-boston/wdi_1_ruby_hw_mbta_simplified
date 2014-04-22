@@ -1,33 +1,33 @@
 
 
 red_line = [
-           "Alewife",
-           "Davis",
-           "Porter",
-           "Harvard",
-           "Central",
-           "Kendall/MIT",
-           "Park Street",
-           "South Station"
+           "alewife",
+           "davis",
+           "porter",
+           "harvard",
+           "central",
+           "kendall/mit",
+           "park street",
+           "south station"
          ]
 
 green_line = [
-           "Haymarket",
-           "Government Center",
-           "Park Street",
-           "Boylston",
-           "Arlington",
-           "Copley"
+           "haymarket",
+           "government center",
+           "park street",
+           "boylston",
+           "arlington",
+           "copley"
          ]
 
 orange_line = [
-           "North Station",
-           "Haymarket",
-           "Park Street",
-           "State Street",
-           "Downtown Crossing",
-           "Chinatown",
-           "Tufts Medical Center"
+           "north station",
+           "haymarket",
+           "park street",
+           "state street",
+           "downtown crossing",
+           "chinatown",
+           "tufts medical center"
          ]
 
 
@@ -38,7 +38,7 @@ subway = [red_line, green_line, orange_line]
 # User selects origin => need to select line as well!
 puts "Welcome to the MBTA!"
 print "Starting Point: "
-origin = gets.chomp.capitalize
+origin = gets.chomp.downcase
 
 
 =begin
@@ -60,7 +60,7 @@ end
 
 # User selects destination
 print "Destination: "
-destination = gets.chomp.capitalize
+destination = gets.chomp.downcase
 
 start_num = red_line.index(origin)
 finish_num = red_line.index(destination)
