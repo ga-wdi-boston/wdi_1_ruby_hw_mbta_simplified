@@ -35,9 +35,26 @@ subway = [red_line, green_line, orange_line]
 
 
 
-# User selects origin
-print "Welcome to the MBTA! Starting Point: "
+# User selects origin => need to select line as well!
+puts "Welcome to the MBTA!"
+print "Starting Point: "
 origin = gets.chomp.capitalize
+
+# Validation
+if origin == "Haymarket"
+  print "Are you on the red line or orange line? "
+  line = gets.chomp.downcase
+end
+
+if line.include?("red")
+  origin = "Haymarket_Red"
+elsif line.include?("orange")
+  origin = "Haymarket_Orange"
+end
+
+
+
+
 
 # User selects destination
 print "Destination: "
