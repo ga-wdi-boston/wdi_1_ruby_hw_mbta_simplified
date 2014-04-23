@@ -7,12 +7,12 @@ orange_line = ["North Station", "Haymarket", "Park Street", "State Street", "Dow
 #green_total_stops = green_line.length
 #orange_total_stops = orange_line.length
 
-#add park street position for each line
+#add park street index position for each line for later distance to park calc
 park_pos_red = red_line.index("Park Street")
 park_pos_green = green_line.index("Park Street")
 park_pos_orange = orange_line.index("Park Street")
 
-#for proofing purposes
+#for proofing if total stops on one line is grabbing exactly that
 #puts red_total_stops
 #puts green_total_stops
 #puts orange_total_stops
@@ -23,7 +23,7 @@ park_pos_orange = orange_line.index("Park Street")
 #puts red_line.index("Alewife") - red_line.index("South Station")
 
 
-# gotta have a clear description as there is no validation added
+# must have a clear description as there is no validation added
 puts "Note: please use one of the following stops exactly as written"
 puts "red_line: Alewife, Davis, Porter, Harvard, Central, Kendall/MIT, Park Street, South Station"
 puts "green_line: Haymarket, Government Center, Park Street, Boylston, Arlington, Copley"
