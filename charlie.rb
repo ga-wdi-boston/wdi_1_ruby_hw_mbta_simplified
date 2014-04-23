@@ -8,7 +8,7 @@ mbta = {
            "Park Street",
            "South Station"],
 
-       green: [
+        green: [
            "Haymarket",
            "Government Center",
            "Park Street",
@@ -16,7 +16,7 @@ mbta = {
            "Arlington",
            "Copley"],
 
-       orange: [
+        orange: [
            "North Station",
            "Haymarket",
            "Park Street",
@@ -24,117 +24,132 @@ mbta = {
            "Downtown Crossing",
            "Chinatown",
            "Tufts Medical Center"]
-}
+        }
 
 
-# User selects origin => need to select line as well!
+# User selects origin
 puts "Welcome to the MBTA!"
 print "What is your departing station? "
 origin = gets.chomp
 
 
-# Validation to clarify which Haymarket
-# if origin == "Haymarket"
-#   print "Are you on the green line or orange line? "
+# Calculate user input for origin location
 
-# end
+# Haymarket validation
+if origin == "Haymarket"
+  print "Are you on the green line or orange line? "
+  haymarket_origin = gets.chomp.downcase
 
-# if line.include?("green")
-#   origin = "Haymarket_Green"
-#   green_line[0] = "Haymarket_Green"  # will not work if order change
-# elsif line.include?("orange")
-#   origin = "Haymarket_Orange"
-#   orange_line[1] = "Haymarket_Orange" # will not work if order change
-# end
+  if haymarket_origin.include?("green")
+    origin_line = :green
+    origin_num = mbta[:green].index(origin)
+    to_park = mbta[:green].index("Park Street")
+    origin_distance = (to_park - origin_num).abs  # distance current to park
+
+  elsif haymarket_origin.include?("orange")
+    origin_line = :orange
+    origin_num = mbta[:orange].index(origin)
+    to_park = mbta[:orange].index("Park Street")
+    origin_distance = (to_park - origin_num).abs   # distance current to park
+  end
+
+end
 
 
-
+# All other locations
 if mbta[:red].include?(origin)
   origin_line = :red
   origin_num = mbta[:red].index(origin)
   to_park = mbta[:red].index("Park Street")
-  origin_distance = (to_park - origin_num).abs   # distance current line
+  origin_distance = (to_park - origin_num).abs   # distance current to park
 end
 
-if mbta[:green].include?(origin)
+if mbta[:green].include?(origin) && origin != "Haymarket"
   origin_line = :green
   origin_num = mbta[:green].index(origin)
   to_park = mbta[:green].index("Park Street")
-  origin_distance = (to_park - origin_num).abs  # distance current line
+  origin_distance = (to_park - origin_num).abs  # distance current to park
 end
 
-if mbta[:orange].include?(origin)
+if mbta[:orange].include?(origin) && origin != "Haymarket"
   origin_line = :orange
   origin_num = mbta[:orange].index(origin)
   to_park = mbta[:orange].index("Park Street")
-  origin_distance = (to_park - origin_num).abs   # distance current line
+  origin_distance = (to_park - origin_num).abs   # distance current to park
 end
 
 
-# User selects destination
+# Calculate user input for destination location
+
 print "Destination: "
 destination = gets.chomp
 
+# Haymarket validation
+if destination == "Haymarket"
+  print "Are you on the green line or orange line? "
+  haymarket_destination = gets.chomp.downcase
 
+  if haymarket_destination.include?("green")
+    destination_line = :green
+    destination_num = mbta[:green].index(destination)
+    to_park = mbta[:green].index("Park Street")
+    destination_distance = (to_park - destination_num).abs  # dist park to dest
+  elsif haymarket_destination.include?("orange")
+    destination_line = :orange
+    destination_num = mbta[:orange].index(destination)
+    to_park = mbta[:orange].index("Park Street")
+    destination_distance = (to_park - destination_num).abs   # dist park to dest
+  end
+end
+
+
+#All other destinations
 if mbta[:red].include?(destination)
   destination_line = :red
   destination_num = mbta[:red].index(destination)
   from_park = mbta[:red].index("Park Street")
-  destination_distance = (from_park - destination_num).abs   # distance current line
+  destination_distance = (from_park - destination_num).abs  # dist park to dest
 end
 
-if mbta[:green].include?(destination)
+if mbta[:green].include?(destination) && origin != "Haymarket"
   destination_line = :green
   destination_num = mbta[:green].index(destination)
   from_park = mbta[:green].index("Park Street")
-  destination_distance = (from_park - destination_num).abs   # distance current line
+  destination_distance = (from_park - destination_num).abs   # dist park to dest
 end
 
-if mbta[:orange].include?(destination)
+if mbta[:orange].include?(destination) && origin != "Haymarket"
   destination_line = :orange
   destination_num = mbta[:orange].index(destination)
   from_park = mbta[:orange].index("Park Street")
-  destination_distance = (from_park - destination_num).abs   # distance current line
+  destination_distance = (from_park - destination_num).abs   # dist park to dest
 end
 
-# Subtract location numbers to find stop difference
+# Determine if on same line or switching lines
+
+if origin_line == destination_line
+  stops = (origin_num - destination_num).abs
+
+  if stops == 0
+    puts "You have arrived at your destination!"
+  elsif stops == 1
+    puts "You have #{stops} stop until you arrive at your destination!"
+  else
+    puts "You have #{stops} stops until you arrive at your destination!"
+  end
+else
+
+# If switching lines
 stops = origin_distance + destination_distance
 
-if stops == 0
-  puts "You have arrived at your destination!"
-else
-  puts "You have #{stops} stops until you arrive at your destination!"
+  if stops == 0
+    puts "You have arrived at your destination!"
+  elsif stops == 1
+    puts "You have #{stops} stop until you arrive at your destination!"
+  else
+    puts "You have #{stops} stops until you arrive at your destination!"
+  end
 end
 
 
 
-
-
-
-
-# Assign number for locations
-# destination_num = mbta[destination_line].index(destination)
-
-
-
-# If staying on the same line:
-
-
-
-
-
-
-# SUM this for multiple lines:
-
-  # Figure out distance from origin to "Park Street"
-  # Figure out distance from Park Street to destination
-
-# Print this result
-
-
-
-
-
-
-# Intersection for all three lines
-# puts red_line & green_line & orange_line
