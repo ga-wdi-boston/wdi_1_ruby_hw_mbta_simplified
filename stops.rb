@@ -3,9 +3,9 @@ red_line = ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "
 green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
 orange_line = ["North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
 #asigning the total number of stops for each line as new variables to call later
-red_total_stops = red_line.length
-green_total_stops = green_line.length
-orange_total_stops = orange_line.length
+#red_total_stops = red_line.length
+#green_total_stops = green_line.length
+#orange_total_stops = orange_line.length
 
 #add park street position for each line
 park_pos_red = red_line.index("Park Street")
@@ -32,6 +32,9 @@ line_arrive = gets.chomp
 puts "Station arrive?"
 station_arrive = gets.chomp
 
+#calculating departure stop's distance from park street
+
+
 # will need to figure out some validation and what make a
 # scenario that understands two separate lines
 if line_depart == "red_line"
@@ -53,6 +56,28 @@ if line_depart == line_arrive
   #calculates total stops for same-line travel
   same_line_stops = initial_pos - final_pos
   puts "Your trip will take #{same_line_stops.abs} stops"
-else
-  puts "You took a trip on two lines and that broke my program"
+  exit # put this here to stop the program for same line trips
 end
+
+#struggled to make statements that didn't have to be explicitly stated
+#but below is longform calcluation of stops to park street and stops
+#from park street in the condition that lines have changed
+if line_depart == "red_line"
+    stops_to_ps = red_line.index(station_depart).to_i - park_pos_red.to_i
+  elsif line_depart == "green_line"
+    stops_to_ps = green_line.index(station_depart).to_i - park_pos_green.to_i
+  else
+    stops_to_ps = orange_line.index(station_depart).to_i - park_pos_orange.to_i
+end
+
+if line_arrive == "red_line"
+    stops_from_ps = red_line.index(station_arrive).to_i - park_pos_red.to_i
+  elsif line_arrive == "green_line"
+    stops_from_ps = green_line.index(station_arrive).to_i - park_pos_green.to_i
+  else
+    stops_from_ps = orange_line.index(station_arrive).to_i - park_pos_orange.to_i
+end
+
+#takes the stops to park street and stops from park street to calculate a trip
+# that we know will be spanning two lines
+puts "Your trip will take #{stops_to_ps.abs + stops_from_ps.abs} stops and will require a transfer at Park Street"
