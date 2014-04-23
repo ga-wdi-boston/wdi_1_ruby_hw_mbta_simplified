@@ -85,10 +85,9 @@ print "Please enter the color (Red, Green or Orange) of the train line #{destina
 destination_train_line = gets.chomp
 
 # Assigned the given train line to the appropriate array
-#Calculate difference between destinations on same line
 if origin_train_line == "Red"
     origin_train_line = red_line
-elsif origin_train_line_== "Green"
+elsif origin_train_line == "Green"
     origin_train_line = green_line
 else
     origin_train_line = orange_line
@@ -102,7 +101,7 @@ else
     destination_train_line = orange_line
 end
 
-print "Your journey is #{destination_train_line.index(destination_station) - origin_train_line.index(origin_station)} stops long."
+print "Your journey is #{(destination_train_line.index(destination_station) - origin_train_line.index(origin_station)).abs + 1} stops long."
 
 
 
