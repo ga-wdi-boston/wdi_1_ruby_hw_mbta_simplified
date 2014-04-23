@@ -24,7 +24,6 @@
 # Defining the stops on the Red Line, Green Line and Orange Line
 red_line = ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT","Park Street", "South Station"]
 
-
 green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
 
 orange_line = ["North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
@@ -39,14 +38,15 @@ starting_station_str = gets.chomp
 #first_stop = red_line.index(starting_station)
 #puts first_stop	
 
+puts "What line are you ending at?"
+ending_line_str = gets.chomp
+
 #Asking the destination 
 puts "What station are you getting off at?"
 ending_station_str = gets.chomp 
 #second_stop = red_line.index(ending_station)
 #puts second_stop
 
-puts "What line are you ending at?"
-ending_line_str = gets.chomp
 
 # Which starting line to use 
 if starting_line_str == "Red"
@@ -70,21 +70,29 @@ end
 def stops(starting_line, starting_station, ending_line, ending_station)
   # get the index of the starting station
   starting_station_index = starting_line.index(starting_station)
+  starting_station_index_Park = starting_line.index("Park Street")
 
   # get the index of the ending station
   ending_station_index = ending_line.index(ending_station)
+  ending_station_index_Park = ending_line.index("Park Street")
+
 
   if starting_line == ending_line
     number_of_stops = (ending_station_index - starting_station_index).abs
-  else
-    puts "Not the same starting and ending line"
+  else  
+    number_of_stops_a = (starting_station_index - starting_station_inex_Park).abs
+    number_of_stops_b = (ending_station_index - ending_station_index_Park).abs
+    number_of_stops= number_of_stops_a + number_of_stops_b 
+    
+
   end
   number_of_stops
 end
 
-stops = stops(starting_line, starting_station_str,ending_line, ending_station_str)
+number_of_stops = stops(starting_line, starting_station_str,ending_line, ending_station_str)
 
-puts "The number of stops are #{stops}"
+  puts "The number of stops are #{number_of_stops}"
+
 
 
 
