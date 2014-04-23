@@ -14,23 +14,23 @@ lines = {"red" => red_line ,
 
 puts "Are you traveling on 1 line?"
 response = gets.chomp
-# if response == "yes"
+if response == "yes"
+  puts "What line are you starting on?"
+  single_line = gets.chomp
+  # Get journey's start and final destination
+  puts "enter jourey origin"
+  origin = gets.chomp
+  first_stop = lines[single_line].index(origin)
 
-#   # Get journey's start and final destination
-#   puts "enter jourey origin"
-#   origin = gets.chomp
-#   first_stop = red_line.index(origin)
-#   puts first_stop
+  puts "enter final destination"
+  destination = gets.chomp
+  second_stop = lines[single_line].index(destination)
+  binding.pry
 
-#   puts "enter final destination"
-#   destination = gets.chomp
-#   second_stop = red_line.index(destination)
-#   puts second_stop
-
-#   # Tells traveler number of stops till reaching destination
-#   distance_between = second_stop - first_stop
-#   puts "Your destination is #{distance_between.abs} stops away!"
-# end
+  # Tells traveler number of stops till reaching destination
+  distance_between = second_stop - first_stop
+  puts "Your destination is #{distance_between.abs} stops away!"
+end
 
 if response == "no"
   puts "What color line are you starting on?"
