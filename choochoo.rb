@@ -14,7 +14,7 @@ def calculate_stops(origin_stop, origin_line, dest_stop, dest_line)
       central: 2,
       kendall: 1,
       park: 0,
-      south_station: -1,
+      south: -1,
   }
 
   green = {
