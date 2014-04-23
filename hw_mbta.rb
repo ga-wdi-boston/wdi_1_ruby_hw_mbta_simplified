@@ -60,3 +60,5 @@ stops = dest_lines[0][:stops].index(dest) - origin_lines[0][:stops].index(origin
 # Takes the absolute value of the integer and puts it on the screen
 # for the User to see.
 puts "#{stops.abs} stops to get from #{origin} to #{dest}."
+
+# Test comment.
