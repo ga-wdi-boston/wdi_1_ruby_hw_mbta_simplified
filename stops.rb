@@ -22,6 +22,15 @@ park_pos_orange = orange_line.index("Park Street")
 #puts red_line.index("South Station")
 #puts red_line.index("Alewife") - red_line.index("South Station")
 
+
+# gotta have a clear description as there is no validation added
+puts "Note: please use one of the following stops exactly as written"
+puts "red_line: Alewife, Davis, Porter, Harvard, Central, Kendall/MIT, Park Street, South Station"
+puts "green_line: Haymarket, Government Center, Park Street, Boylston, Arlington, Copley"
+puts "orange_line: North Station, Haymarket, Park Street, State Street, Downtown Crossing, \n Chinatown, Tufts Medical Center"
+
+
+
 #some asked questions to figure out the to and from
 puts "Line depart?"
 line_depart = gets.chomp
@@ -81,3 +90,4 @@ end
 #takes the stops to park street and stops from park street to calculate a trip
 # that we know will be spanning two lines
 puts "Your trip will take #{stops_to_ps.abs + stops_from_ps.abs} stops and will require a transfer at Park Street"
+
