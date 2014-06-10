@@ -47,12 +47,12 @@ origin_stop = gets.chomp.downcase
 origin_stop = check_station(origin_stop, origin_line, subway)
 
 puts
-puts "Please select an destination line (red, green, orange):"
+puts "Please select a destination line (red, green, orange):"
 destination_line = (gets.chomp.downcase).to_sym
 destination_line = check_line(destination_line, subway)
 
 puts
-puts "Please select an destination station:"
+puts "Please select a destination station:"
 destination_stop = gets.chomp.downcase
 destination_stop = check_station(destination_stop, destination_line, subway)
 
