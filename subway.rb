@@ -1,18 +1,63 @@
+def check_station(station, line, subway)
+  station_exists = subway[line].include?(station)
+
+  if !station_exists
+    puts
+    puts "That station does not exist on the #{line} line."
+    puts "The #{line} line stations are:"
+    puts subway[line]
+    puts
+    puts "Please select a new station:"
+    station = gets.chomp.downcase
+    station = check_station(station, line, subway)
+  end
+  station
+end
+
+def check_line(line, subway)
+  line_exists = subway.key?(line)
+
+  if !line_exists
+    puts
+    puts "That line does not exist."
+    puts "The options are 'red', 'green', or 'orange'"
+    puts
+    puts "Please select a new line:"
+    line = (gets.chomp.downcase).to_sym
+    line = check_line(line, subway)
+  end
+  line
+end
+
 # Initial subway data structure
 subway = {
-  red_line: ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"],
-  green_line: ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"],
-  orange_line: ["North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
+  red: ["alewife", "davis", "porter", "harvard", "central", "kendall/mit", "park street", "south station"],
+  green: ["haymarket", "government center", "park street", "boylston", "arlington", "copley"],
+  orange: ["north station", "haymarket", "park street", "state street", "downtown crossing", "chinatown", "tufts medical center"]
 }
 
-# initialize variables for testing
-origin_stop = "South Station"
-origin_line = :red_line
-destination_stop = "Chinatown"
-destination_line = :orange_line
+# get parameters from user
+puts "Please select an origin line (red, green, orange):"
+origin_line = (gets.chomp.downcase).to_sym
+origin_line = check_line(origin_line, subway)
+
+puts
+puts "Please select an origin station:"
+origin_stop = gets.chomp.downcase
+origin_stop = check_station(origin_stop, origin_line, subway)
+
+puts
+puts "Please select an destination line (red, green, orange):"
+destination_line = (gets.chomp.downcase).to_sym
+destination_line = check_line(destination_line, subway)
+
+puts
+puts "Please select an destination station:"
+destination_stop = gets.chomp.downcase
+destination_stop = check_station(destination_stop, destination_line, subway)
 
 # set the intersection stop
-intersection_stop = "Park Street"
+intersection_stop = "park street"
 
 #initialize num_stops to zero
 num_stops = 0
@@ -27,5 +72,4 @@ else
   num_stops += (subway[origin_line].index(origin_stop) - subway[destination_line].index(destination_stop)).abs
 end
 
-
-puts num_stops
+puts "The #{destination_stop} station on the #{destination_line} line is #{num_stops} stops from the #{origin_stop} station on the #{origin_line} line."
