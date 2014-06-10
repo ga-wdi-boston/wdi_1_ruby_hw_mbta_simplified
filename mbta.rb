@@ -95,5 +95,8 @@ else
   stops_between = stops_between_leg1 + stops_between_leg2
 end
 
-puts stops_between
+puts "There are #{stops_between} stops between #{origin_station.capitalize} and #{end_station.capitalize}."
+if origin_line != end_line
+  puts "You will need to transfer at " + intersection.capitalize
+end
 
