@@ -11,3 +11,7 @@ origin_line = :red_line
 origin_stop = "Central"
 destination_line = :red_line
 destination_stop = "South Station"
+
+distance = (mbta[origin_line].index(origin_stop) - mbta[destination_line].index(destination_stop)).abs
+
+puts "Your journey takes #{distance} stops"
