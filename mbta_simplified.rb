@@ -2,21 +2,31 @@
 
 #Data structures for mbta
 mbta = {
-  redline: ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall/MIT', 'Park Street', 'South Station'],
-  greenline: ['Haymarket', 'Government Center', 'Park Street', 'Boylston', 'Arlington','Copley'],
-  orangeline: ['North Station','Haymarket','Park Street','State Street','Downtown Crossing','Chinatown','Tufts Medical Center'],
-  intersection: ['Park Street']
+  redline: ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall/MIT', 'ParkStreet', 'SouthStation'],
+  greenline: ['Haymarket', 'GovernmentCenter', 'ParkStreet', 'Boylston', 'Arlington','Copley'],
+  orangeline: ['NorthStation','Haymarket','ParkStreet','StateStreet','DowntownCrossing','Chinatown','TuftsMedicalCenter']
 }
 
+
+#TestCase#1
+# puts "Enter your origin line"
+# origin_line = 'redline'.to_sym
+# puts "Enter your origin stop"
+# origin_stop = 'Alewife'
+# puts "Enter your destination line"
+# destination_line = 'redline'.to_sym
+# puts "Enter your destination stop"
+# destination_stop = 'Porter'
+
+#TestCase#2
 puts "Enter your origin line"
 origin_line = 'redline'.to_sym
 puts "Enter your origin stop"
 origin_stop = 'Alewife'
 puts "Enter your destination line"
-destination_line = 'redline'.to_sym
+destination_line = 'greenline'.to_sym
 puts "Enter your destination stop"
-destination_stop = 'Porter'
-
+destination_stop = 'Haymarket'
 
 #This method find index of each station
 def station_index(line, stop, mbta)
@@ -26,15 +36,23 @@ def station_index(line, stop, mbta)
   return stations.index(stop)
 end
 
-origin_stop_index = station_index(origin_line,origin_stop,mbta)
 
-destination_stop_index = station_index(destination_line,destination_stop,mbta)
+if origin_line == destination_line
+  origin_stop_index = station_index(origin_line,origin_stop,mbta)
 
-distance = origin_stop_index + destination_stop_index
+  destination_stop_index = station_index(destination_line,destination_stop,mbta)
+
+  distance = origin_stop_index + destination_stop_index
+
+else
+  origin_stop_index = station_index(origin_line,origin_stop,mbta)
+  origin_intersection_index = station_index(origin_line,'ParkStreet',mbta)
+
+  destination_stop_index = station_index(destination_line,destination_stop,mbta)
+  destination_intersection_index = station_index(destination_line,'ParkStreet',mbta)
+
+  distance = origin_stop_index + origin_intersection_index+ destination_stop_index + destination_intersection_index
+
+end
 
 puts "Traveling from #{origin_stop} to #{destination_stop} is #{distance} stop(s)."
-
-
-
-
-
