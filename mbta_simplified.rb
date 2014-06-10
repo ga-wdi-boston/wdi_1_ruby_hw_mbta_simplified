@@ -11,9 +11,13 @@ mbta = {
 puts "Enter your origin line"
 origin_line = 'redline'.to_sym
 puts "Enter your origin stop"
-origin_line = 'Alewife'
+origin_stop = 'Alewife'
 puts "Enter your destination line"
-origin_line = 'redline'.to_sym
+destination_line = 'redline'.to_sym
 puts "Enter your destination stop"
-origin_line = 'Porter'
+destination_stop = 'Porter'
+
+
+origin_index =
+
 
