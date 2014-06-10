@@ -8,16 +8,19 @@ subway = {
 
 #Manually set origin stop, destination stop, and intersection stop
 origin_stop = "Haymarket"
-destination_stop = "Chinatown"
+destination_stop = "Government Center"
 intersection_stop = "Park Street"
 
 #Manually set origin and destination line
 origin_line = 'green_line'.to_sym
-destination_line = 'orange_line'.to_sym
+destination_line = 'green_line'.to_sym
 
-# Calculation for distance between stops
-
-# Calculation of distance on origin line to Park Street
-puts distance_origin_line = (subway[origin_line].index(intersection_stop) - subway[origin_line].index(origin_stop)).abs
-# Calculation of distance on destination line from Park Street
-puts distance_destination_line = (subway[destination_line].index(intersection_stop) - subway[destination_line].index(destination_stop)).abs
+# Calculation for distance between stops on different lines with intersection stop
+if origin_line != destination_line
+  distance_origin_line = (subway[origin_line].index(intersection_stop) - subway[origin_line].index(origin_stop)).abs
+  distance_destination_line = (subway[destination_line].index(intersection_stop) - subway[destination_line].index(destination_stop)).abs
+  num_stops = distance_origin_line + distance_destination_line
+else
+  num_stops = (subway[origin_line].index(destination_stop) - subway[origin_line].index(origin_stop)).abs
+end
+ puts num_stops
