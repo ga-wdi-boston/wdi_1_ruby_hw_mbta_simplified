@@ -48,3 +48,13 @@ until charlie_map[end_line].include? end_station
   end
 end
 
+# Measure distance between two stops on the same line
+
+if origin_line == end_line
+  origin_index = charlie_map[origin_line].index(origin_station)
+  end_index = charlie_map[end_line].index(end_station)
+  stops_between = (origin_index - end_index).abs
+  puts stops_between
+end
+
+else
