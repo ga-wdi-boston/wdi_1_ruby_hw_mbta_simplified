@@ -9,7 +9,6 @@ mbta_lines = {red: red_line, orange: orange_line, green: green_line}
 
 meet_point = 'Park Street'
 
-
 #user input variables ----------------------
 #gets starting line
 puts "What color line are you starting on?"
@@ -29,7 +28,6 @@ while !mbta_lines[o_line].index(o_stop)
   o_stop = gets.chomp.capitalize
 end
 
-
 #Gets destination line
 puts "What color line will you stop on?"
 d_line = gets.chomp.downcase.to_sym
@@ -46,7 +44,6 @@ d_stop = gets.chomp
 while !mbta_lines[d_line].index(d_stop)
   puts "Sorry not a valid stop on this line. Try again: "
   d_stop = gets.chomp
-  binding.pry
 end
 
 puts "Your starting line is #{o_line} and your starting stop is #{o_stop}"
@@ -59,7 +56,6 @@ if o_line == d_line
   puts "The total number of stops will be: #{same_line_dist}"
 end
 
-
 #find distance between two points on different lines
 if o_line != d_line
   same_line_dist = (mbta_lines[o_line].index(o_stop) - mbta_lines[o_line].index(meet_point)).abs
@@ -67,4 +63,3 @@ if o_line != d_line
   total_dist = same_line_dist + other_line_dist
   puts "The total number of stops will be: #{total_dist}"
 end
-
