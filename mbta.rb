@@ -37,7 +37,7 @@ until charlie_map.key? origin_line
   print "Line: "
   origin_line = gets.chomp.downcase.to_sym
   unless charlie_map.key? origin_line # repeat until they
-    puts "Invalid. Type red, green, or orange."
+    puts "Invalid. Type the name of a line"
   end
 end
 
@@ -57,7 +57,7 @@ until charlie_map.key? end_line
   print "Line: "
   end_line = gets.chomp.downcase.to_sym
   unless charlie_map.key? end_line # repeat until they give a proper line name
-    puts "Invalid. Type red, green, or orange."
+    puts "Invalid. Type the name of a line"
   end
 end
 
@@ -70,32 +70,25 @@ until charlie_map[end_line].include? end_station
 end
 
 def leg_distance(map, line, start, destination)
-  # for this method, both vars MUST be on the same line
   start_index = map[line].index(start)
   end_index = map[line].index(destination)
   return (start_index - end_index).abs
 end
-# I suspect this is inefficient
+# I suspect this is inefficient, because I have to keep typing the map name
+# But it works!
 
 origin_index = charlie_map[origin_line].index(origin_station)
 end_index = charlie_map[end_line].index(end_station)
 
 # Measure distance between two stops on the same line
 if origin_line == end_line
-  # stops_between = (origin_index - end_index).abs
   stops_between = leg_distance(charlie_map, origin_line, origin_station, end_station)
 
 else
   # Measure distance between first stop and transfer station
-  # intersection_index_1 = charlie_map[origin_line].index(intersection)
-  # stops_between_leg1 = (origin_index - intersection_index_1).abs
-
   stops_between_leg1 = leg_distance(charlie_map, origin_line, origin_station, intersection)
 
   # Measure distance between transfer station and final stop
-  # intersection_index_2 = charlie_map[end_line].index(intersection)
-  # stops_between_leg2 = (end_index - intersection_index_2).abs
-
   stops_between_leg2 = leg_distance(charlie_map, end_line, intersection, end_station)
 
   # Add them together
