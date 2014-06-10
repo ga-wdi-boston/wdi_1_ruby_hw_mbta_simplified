@@ -11,7 +11,18 @@ def line_check(subway, line)
   end
 end
 
+#Method to check if stop exists
+def station_check(subway, line, stop)
+  station_exists = subway[line].include?(stop)
 
+  if !station_exists
+    puts "That is not a valid station"
+    stop = gets.chomp.downcase
+    stop = station_check(subway, line, stop)
+  else
+    stop
+  end
+end
 
 # Initial data structure for subway system
 
@@ -28,12 +39,15 @@ origin_line = line_check(subway, origin_line)
 
 puts "Select origin stop: "
 origin_stop = gets.chomp.downcase
-
-puts "Select destination stop: "
-destination_stop = gets.chomp.downcase
+origin_stop = station_check(subway, origin_line, origin_stop)
 
 puts "Select destination line: (green, red, or orange)"
 destination_line = (gets.chomp.downcase << '_line').to_sym
+destination_line = line_check(subway, destination_line)
+
+puts "Select destination stop: "
+destination_stop = gets.chomp.downcase
+destination_stop = station_check(subway, destination_line, destination_stop)
 
 #Manually set intersection stop
 
