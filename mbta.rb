@@ -28,4 +28,23 @@ until charlie_map[origin_line].include? origin_station
   end
 end
 
-binding.pry
+end_line = nil
+end_station = nil
+
+puts "DESTINATION INFORMATION"
+until charlie_map.key? end_line
+  print "Line: "
+  end_line = gets.chomp.downcase.to_sym
+  unless charlie_map.key? end_line # repeat until they
+    puts "Invalid. Type red, green, or orange."
+  end
+end
+
+until charlie_map[end_line].include? end_station
+  print "Station: "
+  end_station = gets.chomp.downcase.delete(" ")
+  unless charlie_map[end_line].include? end_station
+    puts "Invalid. Type the name of the station."
+  end
+end
+
