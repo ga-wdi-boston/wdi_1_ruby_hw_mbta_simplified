@@ -35,17 +35,23 @@ origin_index = mbta[o_line].index(o_stop)
 
 dest_index = mbta[d_line].index(d_stop)
 
-same_line_stops = origin_index - dest_index
+same_line_stops = (origin_index - dest_index).abs
 
 #puts "It will take to #{same_line_stops.abs} to get from #{o_stop} to #{d_stop}."
 
 binding.pry
 
-
-
 # Program can find the distance between two stops on different lines
 
+intersect = "park street"
 
+# If the o_line is different from the d_line you will have to get off at park street (bring the number of stops you have already travelled with you)
+o_to_intersect = mbta[o_line].index(o_stop) - mbta[o_line].index(intersect)
+
+#and find park street on the new line and find the number of stops from there to the d_stop.
+intersect_to_d = mbta[d_line].index(intersect) - mbta[d_line].index(d_stop)
+
+diff_line_stops = o_to_intersect + intersect_to_d
 
 # Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street)
 
