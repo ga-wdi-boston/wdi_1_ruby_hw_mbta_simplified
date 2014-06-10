@@ -9,9 +9,13 @@ CROSSROADS = "Park Street" # intersection point of all lines
 
 origin_line = :red_line
 origin_stop = "Central"
-destination_line = :red_line
-destination_stop = "South Station"
+destination_line = :green_line
+destination_stop = "Haymarket"
 
-distance = (mbta[origin_line].index(origin_stop) - mbta[destination_line].index(destination_stop)).abs
+if origin_line == destination_line
+  distance = (mbta[origin_line].index(origin_stop) - mbta[destination_line].index(destination_stop)).abs
+else
+  distance = (mbta[origin_line].index(origin_stop) - mbta[origin_line].index(CROSSROADS)).abs + (mbta[destination_line].index(destination_stop) - mbta[destination_line].index(CROSSROADS)).abs
+end
 
 puts "Your journey takes #{distance} stops"
