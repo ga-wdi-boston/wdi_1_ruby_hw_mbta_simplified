@@ -7,9 +7,28 @@ charlie_map = {
   :orange => %w(northstation haymarket parkstreet statestreet downtown chinatown tuftsmedicalcenter),
 }
 
-intersection = "parkstreet"
+# Auto-detect the transfer station, and quit if there's more than one option
+intersections = []
+# Get a list of all of the stations
+charlie_map.values.each do |arr|
+  intersections = intersections + arr
+end
+# Find out where the stations all intersect
+charlie_map.values.each do |arr|
+  intersections = intersections & arr
+end
+
+# If there's more than one big intersection, exit!
+if intersections.length > 1
+  puts "ERROR: All lines converge in more than one place."
+  puts "The intersections are " + intersections.join(", ")
+  exit
+end
+
+intersection = intersections[0]
 
 # User-input information
+
 origin_line = nil
 origin_station = nil
 
@@ -37,7 +56,7 @@ puts "DESTINATION INFORMATION"
 until charlie_map.key? end_line
   print "Line: "
   end_line = gets.chomp.downcase.to_sym
-  unless charlie_map.key? end_line # repeat until they
+  unless charlie_map.key? end_line # repeat until they give a proper line name
     puts "Invalid. Type red, green, or orange."
   end
 end
@@ -54,11 +73,10 @@ origin_index = charlie_map[origin_line].index(origin_station)
 end_index = charlie_map[end_line].index(end_station)
 
 # Measure distance between two stops on the same line
-
 if origin_line == end_line
   stops_between = (origin_index - end_index).abs
-else
 
+else
   # Measure distance between first stop and transfer station
   intersection_index_1 = charlie_map[origin_line].index(intersection)
   stops_between_leg1 = (origin_index - intersection_index_1).abs
