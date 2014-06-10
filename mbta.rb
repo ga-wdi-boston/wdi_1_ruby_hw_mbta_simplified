@@ -69,31 +69,38 @@ until charlie_map[end_line].include? end_station
   end
 end
 
+def leg_distance(map, line, start, destination)
+  # for this method, both vars MUST be on the same line
+  start_index = map[line].index(start)
+  end_index = map[line].index(destination)
+  return (start_index - end_index).abs
+end
+# I suspect this is inefficient
+
 origin_index = charlie_map[origin_line].index(origin_station)
 end_index = charlie_map[end_line].index(end_station)
 
 # Measure distance between two stops on the same line
 if origin_line == end_line
-  stops_between = (origin_index - end_index).abs
+  # stops_between = (origin_index - end_index).abs
+  stops_between = leg_distance(charlie_map, origin_line, origin_station, end_station)
 
 else
   # Measure distance between first stop and transfer station
-  intersection_index_1 = charlie_map[origin_line].index(intersection)
-  stops_between_leg1 = (origin_index - intersection_index_1).abs
+  # intersection_index_1 = charlie_map[origin_line].index(intersection)
+  # stops_between_leg1 = (origin_index - intersection_index_1).abs
+
+  stops_between_leg1 = leg_distance(charlie_map, origin_line, origin_station, intersection)
 
   # Measure distance between transfer station and final stop
-  intersection_index_2 = charlie_map[end_line].index(intersection)
-  stops_between_leg2 = (end_index - intersection_index_2).abs
+  # intersection_index_2 = charlie_map[end_line].index(intersection)
+  # stops_between_leg2 = (end_index - intersection_index_2).abs
+
+  stops_between_leg2 = leg_distance(charlie_map, end_line, intersection, end_station)
 
   # Add them together
   stops_between = stops_between_leg1 + stops_between_leg2
 end
 
 puts stops_between
-
-binding.pry
-
-
-
-
 
