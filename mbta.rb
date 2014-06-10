@@ -1,9 +1,31 @@
 require 'pry'
 
+# initialize map
 charlie_map = {
-  :redline => %w(Alewife Davis Porter Harvard Central Kendall/MIT ParkStreet SouthStation),
-  :greenline => %w(Haymarket GovernmentCenter ParkStreet Boylston Arlington Copley),
-  :orangeline => %w(NorthStation Haymarket ParkStreet StateSt Downtown Chinatown TuftsMedicalCenter)
+  :red => %w(alewife davis porter harvard central kendall/mit parkstreet southstation),
+  :green => %w(haymarket governmentcenter parkstreet boylston arlington copley),
+  :orange => %w(northstation haymarket parkstreet statestreet downtown chinatown tuftsmedicalcenter)
 }
+
+# User-input information
+origin_line = nil
+origin_station = nil
+
+puts "ORIGIN INFORMATION"
+until charlie_map.key? origin_line
+  print "Line: "
+  origin_line = gets.chomp.downcase.to_sym
+  unless charlie_map.key? origin_line # repeat until they
+    puts "Invalid. Type red, green, or orange."
+  end
+end
+
+until charlie_map[origin_line].include? origin_station
+  print "Station: "
+  origin_station = gets.chomp.downcase.delete(" ")
+  unless charlie_map[origin_line].include? origin_station
+    puts "Invalid. Type the name of the station."
+  end
+end
 
 binding.pry
