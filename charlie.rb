@@ -9,6 +9,33 @@ mbta = {
 
 binding.pry
 
+# obtain input data from user: origin stop, origin line, destination stop, destination line
+
+puts "What is your origin MBTA line?"
+
+o_line = gets.chomp.downcase
+
+puts "What is your origin MBTA stop?"
+
+o_stop = gets.chomp.downcase
+
+puts "What is your desitination line?"
+
+d_line = gets.chomp.downcase
+
+puts "What is your destination stop?"
+
+d_stop = gets.chomp.downcase
+
+
+
+
+
+
+
+
+
+
 # Program can find the distance between two stops on the same line
 
 # Program can find the distance between two stops on different lines
