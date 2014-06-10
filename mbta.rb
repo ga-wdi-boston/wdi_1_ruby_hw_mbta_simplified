@@ -4,8 +4,10 @@ require 'pry'
 charlie_map = {
   :red => %w(alewife davis porter harvard central kendall/mit parkstreet southstation),
   :green => %w(haymarket governmentcenter parkstreet boylston arlington copley),
-  :orange => %w(northstation haymarket parkstreet statestreet downtown chinatown tuftsmedicalcenter)
+  :orange => %w(northstation haymarket parkstreet statestreet downtown chinatown tuftsmedicalcenter),
 }
+
+intersection = "parkstreet"
 
 # User-input information
 origin_line = nil
@@ -48,13 +50,32 @@ until charlie_map[end_line].include? end_station
   end
 end
 
+origin_index = charlie_map[origin_line].index(origin_station)
+end_index = charlie_map[end_line].index(end_station)
+
 # Measure distance between two stops on the same line
 
 if origin_line == end_line
-  origin_index = charlie_map[origin_line].index(origin_station)
-  end_index = charlie_map[end_line].index(end_station)
   stops_between = (origin_index - end_index).abs
-  puts stops_between
+else
+
+  # Measure distance between first stop and transfer station
+  intersection_index_1 = charlie_map[origin_line].index(intersection)
+  stops_between_leg1 = (origin_index - intersection_index_1).abs
+
+  # Measure distance between transfer station and final stop
+  intersection_index_2 = charlie_map[end_line].index(intersection)
+  stops_between_leg2 = (end_index - intersection_index_2).abs
+
+  # Add them together
+  stops_between = stops_between_leg1 + stops_between_leg2
 end
 
-else
+puts stops_between
+
+binding.pry
+
+
+
+
+
