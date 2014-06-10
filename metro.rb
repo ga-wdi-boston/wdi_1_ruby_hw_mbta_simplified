@@ -5,12 +5,33 @@ metro = {
   intersection: "park"
 }
 
-start_line = :orange
-end_line = :red
-start_station = "tufts"
-end_station = "alewife"
 
+start_line = :unset
+end_line = :unset
+start_station = :unset
+end_station = :unset
 distance = -1
+
+until metro[start_line]
+puts "Enter your starting line ('red', 'green', or 'orange'):"
+start_line = gets.chomp.downcase.to_sym
+end
+
+until metro[start_line].index(start_station)
+  puts "Enter your start station (#{metro[start_line]} are the stations):"
+  start_station = gets.chomp.downcase
+end
+
+
+until metro[end_line]
+puts "Enter your destination line ('red', 'green', or 'orange'):"
+end_line = gets.chomp.downcase.to_sym
+end
+
+until metro[end_line].index(end_station)
+  puts "Enter your destination station (#{metro[end_line]} are the stations):"
+  end_station = gets.chomp.downcase
+end
 
 # If start-line and end-line are the same
 if start_line == end_line
@@ -22,4 +43,4 @@ else
   distance = distance_to_park + distance_from_park
 end
 
-puts distance
+puts "#{distance} stops"
