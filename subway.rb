@@ -13,6 +13,8 @@ while !underground.key?(loc_line)
   puts "That line is not valid"
   puts "Please select a valid line (red, green, yellow)."
   loc_line = gets.chomp.downcase.to_sym
+end
+
 
 puts "What stop will you be getting on?"
 location = gets.chomp
