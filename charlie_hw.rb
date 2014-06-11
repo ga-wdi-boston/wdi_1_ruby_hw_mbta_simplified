@@ -27,10 +27,10 @@ line_final = gets.chomp
 #Converting to calculate distance
 
 origin = subway[line_origin.downcase.to_sym]
-puts origin.index(stop_origin)
+puts (origin.index("Park Street") - origin.index(stop_origin)).abs
 
 destination = subway[line_final.downcase.to_sym]
-puts destination.index(stop_final)
+puts (destination.index("Park Street") - destination.index(stop_final)).abs
 
 puts "You need to go ------ stops to get from #{stop_origin} on the #{line_origin} line to #{stop_final} on the #{line_final} line."
 
