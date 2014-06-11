@@ -27,6 +27,12 @@ end
 
 puts "On what line is your destination?"
 dest_line = gets.chomp.downcase.to_sym
+while !underground.key?(dest_line)
+  puts "That is not a valid stop on the #{dest_line}"
+  puts "Please select a valid stop on the #{dest_line}"
+  dest_line = gets.chomp.downcase.to_sym
+end
+
 
 puts "What is your destination stop?"
 destination = gets.chomp
