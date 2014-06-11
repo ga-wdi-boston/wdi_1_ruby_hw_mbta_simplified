@@ -8,11 +8,11 @@ subway = {
 }
 
 puts "Please choose a subway line"
-line1 = gets.chomp
+line1 = (gets.chomp.downcase).to_sym
 puts "Please choose an origin stop"
 origin = gets.chomp
 puts "Please choose the line your destination stop is on"
-line2 = gets.chomp
+line2 = (gets.chomp.downcase).to_sym
 puts "Please choose a destination :"
 dest = gets.chomp
 
