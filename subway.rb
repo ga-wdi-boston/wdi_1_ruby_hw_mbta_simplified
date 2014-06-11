@@ -18,6 +18,12 @@ end
 
 puts "What stop will you be getting on?"
 location = gets.chomp
+while !underground[loc_line].index(location)
+  puts "That is not a valid stop on the #{loc_line}"
+  puts "Please select a valid stop on the #{loc_line} line."
+  location = gets.chomp
+end
+
 
 puts "On what line is your destination?"
 dest_line = gets.chomp.downcase.to_sym
