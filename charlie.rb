@@ -7,8 +7,6 @@ mbta = {
   orange: ["north station", "haymarket", "park street", "state street", "downtown crossing", "chinatown", "tufts medical center"]
 }
 
-
-
 # obtain input data from user: origin stop, origin line, destination stop, destination line
 
 puts "What is your origin MBTA line?"
