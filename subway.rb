@@ -9,6 +9,10 @@ underground = { red: red_line,
 
 puts "What line will you be getting on?"
 loc_line = gets.chomp.downcase.to_sym
+while !underground.key?(loc_line)
+  puts "That line is not valid"
+  puts "Please select a valid line (red, green, yellow)."
+  loc_line = gets.chomp.downcase.to_sym
 
 puts "What stop will you be getting on?"
 location = gets.chomp
