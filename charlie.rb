@@ -52,7 +52,7 @@ current_station = stations.find do |station|
 end
 
 stations.select do |key, value|
-  value.value?("red")
+  value.value?(origin_line.downcase)
 end
 
 binding.pry
