@@ -17,7 +17,6 @@ while !underground.key?(loc_line)
   loc_line = gets.chomp.downcase.to_sym
 end
 
-
 puts "What stop will you be getting on?"
 location = gets.chomp.capitalize
 while !underground[loc_line].index(location)
@@ -26,7 +25,6 @@ while !underground[loc_line].index(location)
   location = gets.chomp.capitalize
 end
 
-
 puts "On what line is your destination?"
 dest_line = gets.chomp.downcase.to_sym
 while !underground.key?(dest_line)
@@ -34,7 +32,6 @@ while !underground.key?(dest_line)
   puts "Please select a valid line (red, green, yellow)."
   dest_line = gets.chomp.downcase.to_sym
 end
-
 
 puts "What is your destination stop?"
 destination = gets.chomp.capitalize
