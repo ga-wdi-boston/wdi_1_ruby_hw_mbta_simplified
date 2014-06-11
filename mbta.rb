@@ -1,3 +1,13 @@
+def getLine(trip_end)
+  print("What is your #{trip_end} line? ")
+  (gets.chomp.split[0].downcase + "_line").to_sym
+end
+
+def getStop(trip_end)
+  print("What is your #{trip_end} stop? ")
+  (gets.chomp.downcase.split.each { |word| word.capitalize!}).join(" ")
+end
+
 mbta =
 {red_line: ["Alewife", "Davis", "Porter", "Harvard", "Central",
             "Kendall/MIT", "Park Street", "South Station"],
@@ -8,17 +18,13 @@ orange_line: ["North Station", "Haymarket", "Park Street", "State Street", "Down
 CROSSROADS = "Park Street" # intersection point of all lines
 
 begin
-  print("What is your origin line? ")
-  origin_line = (gets.chomp.split[0].downcase + "_line").to_sym
-  print("What is your origin stop? ")
-  origin_stop = (gets.chomp.downcase.split.each { |word| word.capitalize!}).join(" ")
+  origin_line = getLine("origin")
+  origin_stop = getStop("origin")
 end while !(mbta[origin_line].index(origin_stop))
 
 begin
-  print("What is your destination line? ")
-  destination_line = (gets.chomp.split[0].downcase + "_line").to_sym
-  print("What is your destination stop? ")
-  destination_stop = (gets.chomp.downcase.split.each { |word| word.capitalize!}).join(" ")
+  destination_line = getLine("destination")
+  destination_stop = getStop("destination")
 end while !(mbta[destination_line].index(destination_stop))
 
 if origin_line == destination_line
