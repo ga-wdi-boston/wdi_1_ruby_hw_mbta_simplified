@@ -3,9 +3,9 @@ green_line = ['Haymarket','Government Center', 'Park Street', 'Boylston', 'Arlin
 yellow_line = ['North Station', 'Haymarket', 'Park Street', 'State Street', 'Downtown Crossing', 'Chinatown', 'Tufts Medical Center']
 
 underground = { red: red_line,
-  green: green_line,
-  yellow: yellow_line
-}
+                green: green_line,
+                yellow: yellow_line
+                }
 
 transfer_stop = "Park Street"
 
@@ -44,11 +44,10 @@ end
 if loc_line == dest_line
   one_line = (underground[loc_line].index(location) - underground[loc_line].index(destination)).abs
   puts "Go #{one_line} stops on the #{loc_line} line and get off"
-  else
-    first_line_stops = (underground[loc_line].index(location) - underground[loc_line].index(transfer_stop)).abs
-    transfer_line_stops = (underground[dest_line].index(transfer_stop) - underground[dest_line].index(destination)).abs
-    total_stops = first_line_stops + transfer_line_stops
-  end
+else
+  first_line_stops = (underground[loc_line].index(location) - underground[loc_line].index(transfer_stop)).abs
+  transfer_line_stops = (underground[dest_line].index(transfer_stop) - underground[dest_line].index(destination)).abs
+  total_stops = first_line_stops + transfer_line_stops
+end
 
-  puts "In total, you will travel #{total_stops} stops."
-
+puts "In total, you will travel #{total_stops} stops."
