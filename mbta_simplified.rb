@@ -2,9 +2,9 @@
 
 #Data structures for mbta
 mbta = {
-  redline: ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall/MIT', 'ParkStreet', 'SouthStation'],
-  greenline: ['Haymarket', 'GovernmentCenter', 'ParkStreet', 'Boylston', 'Arlington','Copley'],
-  orangeline: ['NorthStation','Haymarket','ParkStreet','StateStreet','DowntownCrossing','Chinatown','TuftsMedicalCenter']
+  redline: ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall/mit', 'Parkstreet', 'Southstation'],
+  greenline: ['Haymarket', 'Governmentcenter', 'Parkstreet', 'Boylston', 'Arlington','Copley'],
+  orangeline: ['Northstation','Haymarket','Parkstreet','Statestreet','Downtowncrossing','Chinatown','Tuftsmedicalcenter']
 }
 
 # #TestCase#1
@@ -27,21 +27,34 @@ mbta = {
 # puts "Enter your destination stop"
 # destination_stop = 'Haymarket'
 
-#Prompt the user
-puts "Enter your origin line"
+#Prompt the user and check the inputs.
+origin_line = ''
+while !mbta.has_key?(origin_line)
+puts "Enter your origin line (Everything in lowercase): "
 origin_line = gets.chomp.to_sym
-puts "Enter your origin stop"
-origin_stop = gets.chomp
-puts "Enter your destination line"
+end
+
+origin_stop = ''
+while !mbta[origin_line].include? origin_stop
+puts "Enter your origin stop (Everything in lowercase): "
+origin_stop = gets.chomp.capitalize
+end
+
+destination_line = ''
+while !mbta.has_key?(destination_line)
+puts "Enter your destination line (Everything in lowercase): "
 destination_line = gets.chomp.to_sym
-puts "Enter your destination stop"
-destination_stop = gets.chomp
+end
+
+destination_stop = ''
+while !mbta[destination_line].include? destination_stop
+puts "Enter your destination stop (Everything in lowercase): "
+destination_stop = gets.chomp.capitalize
+end
 
 #This method find index of each station
 def station_index(line, stop, mbta)
   stations = mbta[line]
-  puts stations
-  puts stations.index(stop)
   return stations.index(stop)
 end
 
@@ -54,10 +67,10 @@ if origin_line == destination_line
 
 else
   origin_stop_index = station_index(origin_line,origin_stop,mbta)
-  origin_intersection_index = station_index(origin_line,'ParkStreet',mbta)
+  origin_intersection_index = station_index(origin_line,'Parkstreet',mbta)
 
   destination_stop_index = station_index(destination_line,destination_stop,mbta)
-  destination_intersection_index = station_index(destination_line,'ParkStreet',mbta)
+  destination_intersection_index = station_index(destination_line,'Parkstreet',mbta)
 
   distance = ((origin_stop_index - origin_intersection_index) + (destination_stop_index - destination_intersection_index)).abs
 
