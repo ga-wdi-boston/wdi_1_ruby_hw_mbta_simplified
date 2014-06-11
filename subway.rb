@@ -7,3 +7,5 @@ subway = {
     "Chinatown", "Tufts Medical Center"]
 }
 
+puts "Please choose an origin stop"
+origin = gets.chomp
