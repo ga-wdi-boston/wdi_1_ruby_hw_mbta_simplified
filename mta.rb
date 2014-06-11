@@ -19,17 +19,17 @@ origin_stop = "Davis".to_sym
 
 # print "Enter the destination line: "
 # change red to = gets.chomp.to_sym
-destination_line = "orange".to_sym
+destination_line = "red".to_sym
 
 # print "Enter the destination stop: "
 # change Kendall to = gets.chomp.to_sym
-destination_stop = "Tufts".to_sym
+destination_stop = "Davis".to_sym
 
 
 # lines[origin_line] returns the array of stops on given line
 # index(origin_stop) searches for the index of the origin_stop provided
 origin_index = lines[origin_line].index("Davis")
-destination_index = lines[destination_line].index("Tufts")
+destination_index = lines[destination_line].index("Davis")
 
 # simple case, both origin and destination stops are on the same line.
 # use abs because you don't ever want to get a negative number
