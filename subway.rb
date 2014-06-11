@@ -11,7 +11,8 @@ puts "Please choose a subway line"
 line1 = gets.chomp
 puts "Please choose an origin stop"
 origin = gets.chomp
-
+puts "Please choose the line your destination stop is on"
+line2 = gets.chomp
 puts "Please choose a destination :"
 dest = gets.chomp
 
