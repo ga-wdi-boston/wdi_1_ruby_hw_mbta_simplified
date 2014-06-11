@@ -7,26 +7,35 @@ mbta = {
   orangeline: ['NorthStation','Haymarket','ParkStreet','StateStreet','DowntownCrossing','Chinatown','TuftsMedicalCenter']
 }
 
-
-#TestCase#1
+# #TestCase#1
 # puts "Enter your origin line"
 # origin_line = 'redline'.to_sym
 # puts "Enter your origin stop"
-# origin_stop = 'Alewife'
+# origin_stop = 'Davis'
 # puts "Enter your destination line"
 # destination_line = 'redline'.to_sym
 # puts "Enter your destination stop"
-# destination_stop = 'Porter'
+# destination_stop = 'Central'
 
 #TestCase#2
+# puts "Enter your origin line"
+# origin_line = 'redline'.to_sym
+# puts "Enter your origin stop"
+# origin_stop = 'Porter'
+# puts "Enter your destination line"
+# destination_line = 'greenline'.to_sym
+# puts "Enter your destination stop"
+# destination_stop = 'Haymarket'
+
+#Prompt the user
 puts "Enter your origin line"
-origin_line = 'redline'.to_sym
+origin_line = gets.chomp.downcase.to_sym
 puts "Enter your origin stop"
-origin_stop = 'Alewife'
+origin_stop = gets.chomp.downcase
 puts "Enter your destination line"
-destination_line = 'greenline'.to_sym
+destination_line = gets.chomp.downcase.to_sym
 puts "Enter your destination stop"
-destination_stop = 'Haymarket'
+destination_stop = gets.chomp.downcase
 
 #This method find index of each station
 def station_index(line, stop, mbta)
@@ -36,13 +45,12 @@ def station_index(line, stop, mbta)
   return stations.index(stop)
 end
 
-
 if origin_line == destination_line
   origin_stop_index = station_index(origin_line,origin_stop,mbta)
 
   destination_stop_index = station_index(destination_line,destination_stop,mbta)
 
-  distance = origin_stop_index + destination_stop_index
+  distance = (origin_stop_index - destination_stop_index).abs
 
 else
   origin_stop_index = station_index(origin_line,origin_stop,mbta)
@@ -51,7 +59,7 @@ else
   destination_stop_index = station_index(destination_line,destination_stop,mbta)
   destination_intersection_index = station_index(destination_line,'ParkStreet',mbta)
 
-  distance = origin_stop_index + origin_intersection_index+ destination_stop_index + destination_intersection_index
+  distance = ((origin_stop_index - origin_intersection_index) + (destination_stop_index - destination_intersection_index)).abs
 
 end
 
