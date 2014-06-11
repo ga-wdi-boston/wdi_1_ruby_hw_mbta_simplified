@@ -19,11 +19,11 @@ end
 
 
 puts "What stop will you be getting on?"
-location = gets.chomp
+location = gets.chomp.capitalize
 while !underground[loc_line].index(location)
   puts "That is not a valid stop on the #{loc_line}"
   puts "Please select a valid stop on the #{loc_line} line."
-  location = gets.chomp
+  location = gets.chomp.capitalize
 end
 
 
@@ -37,11 +37,11 @@ end
 
 
 puts "What is your destination stop?"
-destination = gets.chomp
+destination = gets.chomp.capitalize
 while !underground[dest_line].index(destination)
   puts "That is not a valid stop on the #{dest_line}"
   puts "Please select a valid stop on the #{dest_line}"
-  destination = gets.chomp
+  destination = gets.chomp.capitalize
 end
 
 if loc_line == dest_line
