@@ -15,3 +15,6 @@ location = gets.chomp
 
 puts "On what line is your destination?"
 dest_line = gets.chomp.downcase.to_sym
+
+puts "What is your destination stop?"
+destination = gets.chomp
