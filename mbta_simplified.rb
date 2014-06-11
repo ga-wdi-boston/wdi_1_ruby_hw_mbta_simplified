@@ -87,4 +87,4 @@ else
 
 end
 
-puts "Traveling from #{origin_stop} to #{destination_stop} is #{distance} stop(s)."
+puts distance == 0 ? "You have entered a same station for origin and destination." : "Traveling from #{origin_stop} to #{destination_stop} is #{distance} stop."
