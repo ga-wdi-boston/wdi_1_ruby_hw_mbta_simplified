@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry'
 
 #red = ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall', 'Park', 'South Station']
 #green = ['Copley', 'Arlington', 'Boylston', 'Park Street', 'Government Center', 'Haymarket']
@@ -35,10 +35,18 @@ destination_index = lines[destination_line].index("Kendall")
 # use abs because you don't ever want to get a negative number
 number_of_stops_same_line = (destination_index - origin_index).abs
 
-binding.pry
+if origin_line == destination_line
+  puts "You have to go #{number_of_stops_same_line} stops."
+else
+  puts "You have to go #{number_of_stops_switch_lines} stops."
+end
 
 # more complex, origin & destination stops are on different lines
 #number_of_stops_switch_lines = (origin_index - destination_index).abs + (origin_index - destination_index).abs
+
+#binding.pry
+
+
 
 
 
