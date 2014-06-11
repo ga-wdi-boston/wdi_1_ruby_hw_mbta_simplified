@@ -27,23 +27,40 @@ orange_line_stops = ['North Station',
 
 subway = {red: red_line_stops, green: green_line_stops, orange: orange_line_stops}
 
-start_stop = 'Haymarket'
-end_stop = 'Downtown Crossing'
+
+
+def stops_in_same_line(start_stop, end_stop, line, the_subway)
+  stop_count = 0
+
+  the_subway[line].rotate(the_subway[line].index(start_stop)).each do | stop |
+
+    if stop == end_stop
+      break
+    end
+
+    stop_count += 1
+  end
+
+  if stop_count > the_subway[line].length / 2
+    stop_count = the_subway[line].length - stop_count
+  end
+
+  stop_count
+
+end
+
+start_pos= 'Haymarket'
+end_pos = 'Downtown Crossing'
 start_line = 'Orange'.downcase.to_sym
 end_line = 'Orange'.downcase.to_sym
 
-stop_count = 0
 
-subway[start_line].rotate(subway[start_line].index(start_stop)).each do | stop |
+puts stops_in_same_line(start_pos,end_pos,start_line,subway)
 
-  if stop == end_stop
-    break
-  end
 
-  stop_count += 1
 
-end
 
-if stop_count > subway[start_line].length / 2
-  stop_count = subway[start_line].length - stop_count
-end
+
+
+
+
