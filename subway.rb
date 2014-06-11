@@ -46,3 +46,5 @@ end
 
 if loc_line == dest_line
   one_line = (underground[loc_line].index(location) - underground[loc_line].index(destination)).abs
+  puts "Go #{one_line} stops on the #{loc_line} line and get off"
+
