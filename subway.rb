@@ -38,6 +38,6 @@ else
   #number of stops between you and park street, and the number of stops between park street and your destination
 
   diff_dis = distance_origin_line + distance_destination_line
-  puts diff_dis
+  puts "The number of stops is #{diff_dis}"
   #adds and puts the sum of each number of stops
 end
