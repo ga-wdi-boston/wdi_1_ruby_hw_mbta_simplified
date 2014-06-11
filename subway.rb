@@ -13,3 +13,5 @@ loc_line = gets.chomp.downcase.to_sym
 puts "What stop will you be getting on?"
 location = gets.chomp
 
+puts "On what line is your destination?"
+dest_line = gets.chomp.downcase.to_sym
