@@ -6,3 +6,6 @@ underground = { red: red_line,
   green: green_line,
   yellow: yellow_line
 }
+
+puts "What line will you be getting on?"
+loc_line = gets.chomp.downcase.to_sym
