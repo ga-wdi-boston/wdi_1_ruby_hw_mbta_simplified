@@ -1,4 +1,7 @@
 
+#We have a subway and we need to tell the user how many stops it will take
+# him/her to get from one stop to another
+
 red_line_stops = ['Alewife',
 'Davis',
 'Porter',
@@ -24,15 +27,15 @@ orange_line_stops = ['North Station',
 'Tufts Medical Center'
 ]
 
-
+#I make the subway a hash of arrays
 subway = {red: red_line_stops, green: green_line_stops, orange: orange_line_stops}
 
+#method will give you the number of stops between two stops on the same line.
 def stops_in_same_line(start_stop, end_stop, line, the_subway)
-
   return (the_subway[line].index(start_stop) - the_subway[line].index(end_stop)).abs
-
 end
 
+#Method will return the intersection on a subway
 def find_intersection(the_subway)
 
   the_subway[the_subway.keys[0]].each do | stop |
@@ -67,7 +70,6 @@ until subway[end_line].include?(end_pos =
   puts "That's not a station on the #{end_line.to_s} line."
 end
 
-
 intersection = find_intersection(subway)
 
 print "Number of stops to get from #{start_pos} to #{end_pos}: "
@@ -77,10 +79,3 @@ if (start_line != end_line)
 else
   puts stops_in_same_line(start_pos, end_pos, start_line, subway)
 end
-
-
-
-
-
-
-
