@@ -35,7 +35,9 @@ destination_index = lines[destination_line].index("Davis")
 # use abs because you don't ever want to get a negative number
 number_of_stops_same_line = (destination_index - origin_index).abs
 
+# Returns index of Park street on your origin line
 park_index_first_line = lines[origin_line].index("Park Street")
+# Returns index of Park street on your destination line
 park_index_switch_lines = lines[destination_line].index("Park Street")
 # more complex, origin & destination stops are on different lines
 number_of_stops_switch_lines = (park_index_first_line - origin_index).abs + (park_index_switch_lines - destination_index).abs
