@@ -21,8 +21,8 @@ distance = -1
 
 # get start line
 until metro[start_line]
-puts "Enter your starting line ('red', 'green', or 'orange'):"
-start_line = gets.chomp.downcase.to_sym
+  puts "Enter your starting line ('red', 'green', or 'orange'):"
+  start_line = gets.chomp.downcase.to_sym
 end
 
 # get start_station
@@ -33,8 +33,8 @@ end
 
 # get end_line
 until metro[end_line]
-puts "Enter your destination line ('red', 'green', or 'orange'):"
-end_line = gets.chomp.downcase.to_sym
+  puts "Enter your destination line ('red', 'green', or 'orange'):"
+  end_line = gets.chomp.downcase.to_sym
 end
 
 # get end_station
@@ -45,13 +45,15 @@ end
 
 # Use the indexes of arrays of stops to calculate distance
 if start_line == end_line
-  # If start-line and end-line are the same
-  distance = (metro[start_line].index(start_station) - metro[start_line].index(end_station)).abs
+  distance = (metro[start_line].index(start_station)
+            - metro[start_line].index(end_station)).abs
 else
   # handle crossing to a different start_line
-  distance_to_intersection = (metro[start_line].index(start_station) - metro[start_line].index(metro[:intersection])).abs
-  distance_from_intersection = (metro[end_line].index(end_station) - metro[end_line].index(metro[:intersection])).abs
-  distance = distance_to_intersection + distance_from_intersection
+  distance_to_intersect = (metro[start_line].index(start_station)
+                         - metro[start_line].index(metro[:intersection])).abs
+  distance_from_intersect = (metro[end_line].index(end_station)
+                           - metro[end_line].index(metro[:intersection])).abs
+  distance = distance_to_intersect + distance_from_intersect
 end
 
 puts "#{distance} stops"
