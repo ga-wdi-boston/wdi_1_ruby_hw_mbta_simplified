@@ -9,30 +9,25 @@ mbta = {
 }
 
 #lines will be the sym to use as keys in the mbta hash
-origin_line = :orange #user input
+origin_line = :orange #user input **.to_sym
 origin_stop = mbta[origin_line].index('Chinatown') #will be var from user
 origin = [origin_line, origin_stop]
 dest_line = :orange #user input
 dest_stop = mbta[dest_line].index('North Station') #user input
 dest = [dest_line, dest_stop]
 
-
-
-start at origin_stop #evals to an array index
-  output each stop along the array
-finish at dest_stop #evals to an array index
-
+station_cntr = origin_stop #better named var for a cntr
 if origin_stop > dest_stop #ex 4..0
   while station_cntr >= dest_stop #cntr starts at 4
-    puts #array placed name
+    puts mbta[origin_line][station_cntr] #var[key][array index]
     station_cntr -= 1
   end
 elsif origin_stop < dest_stop #ex 0..4
   while station_cntr <= dest_stop #cntr starts at 0 & inc to dest_stop
-    puts #array placed name
+    puts mbta[origin_line][station_cntr] #var[key][array index]
     station_cntr += 1
   end
+end
 
-
-do starting at origin_stop{ |var| } until dest_stop
+#do starting at origin_stop{ |var| } until dest_stop
 
