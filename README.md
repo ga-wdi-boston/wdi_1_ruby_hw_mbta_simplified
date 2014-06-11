@@ -41,11 +41,11 @@ Refer to the instructions in the [Guess the Number homework](https://github.com/
 
 ## Specifications
 
-* Program has the subway system defined with appropriate data structures
-* Program can find the distance between two stops on the same line
-* Program can find the distance between two stops on different lines
-* Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street)
-* Stops and lines can be added, removed, or rearranged in your code without making any changes to the route-finding logic (within reason &ndash; every line must intersect at a single common stop)
+1 Program has the subway system defined with appropriate data structures
+2 Program can find the distance between two stops on the same line
+3 Program can find the distance between two stops on different lines
+4 Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street)
+5 Stops and lines can be added, removed, or rearranged in your code without making any changes to the route-finding logic (within reason &ndash; every line must intersect at a single common stop)
 * Repository has several logical commits with descriptive messages
 * Code uses correct indentation/style and descriptive variable names
 
