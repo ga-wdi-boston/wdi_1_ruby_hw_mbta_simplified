@@ -31,7 +31,7 @@ origin_station = "alewife"
 
 destination_line = "red"
 
-destination_station = "South Station"
+destination_station = "kendall"
 
 lines = ["Red", "Green", "Orange"]
 
@@ -61,8 +61,17 @@ origin_line_stations = stations.select do |key, value|
   value.value?(origin_line.downcase)
 end
 
+#find all stations that are on the destination_line
+destination_line_stations = stations.select do |key, value|
+  value.value?(destination_line.downcase)
+end
+
 #return the index of the current station
 current_station_index = origin_line_stations.keys.index(origin_station.to_sym)
+
+#return the index of the destination station on its line
+destination_station_index = destination_line_stations.keys.index(destination_station.to_sym)
+
 
 binding.pry
 
