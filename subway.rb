@@ -7,6 +7,8 @@ underground = { red: red_line,
   yellow: yellow_line
 }
 
+transfer_stop = "Park Street"
+
 puts "What line will you be getting on?"
 loc_line = gets.chomp.downcase.to_sym
 while !underground.key?(loc_line)
