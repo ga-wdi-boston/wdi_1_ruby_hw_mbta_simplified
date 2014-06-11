@@ -29,13 +29,13 @@ mbta = {
 
 #Prompt the user
 puts "Enter your origin line"
-origin_line = gets.chomp.downcase.to_sym
+origin_line = gets.chomp.to_sym
 puts "Enter your origin stop"
-origin_stop = gets.chomp.downcase
+origin_stop = gets.chomp
 puts "Enter your destination line"
-destination_line = gets.chomp.downcase.to_sym
+destination_line = gets.chomp.to_sym
 puts "Enter your destination stop"
-destination_stop = gets.chomp.downcase
+destination_stop = gets.chomp
 
 #This method find index of each station
 def station_index(line, stop, mbta)
