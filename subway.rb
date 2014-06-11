@@ -7,27 +7,37 @@ subway = #creates HASH for unordered lines, and nested arrays for corresponding,
 
 
 puts 'What color Origin Line would you like to take?'
-  origin_line = (gets.chomp.downcase + '_line').to_sym
-  #takes origin line color, downcases and converts to symbol to refer to specific line hash
+origin_line = (gets.chomp.downcase + '_line').to_sym
+#takes origin line color, downcases and converts to symbol to refer to specific line hash
 
 
 puts 'What is your starting stop?'
-  origin_stop = gets.chomp.downcase
+origin_stop = gets.chomp.downcase
 #takes stop, downcases and converts to symbol to refer to specific array string
 
 puts 'What is your Destination Line color?'
-  destination_line = (gets.chomp.downcase+ '_line').to_sym
-  #takes destination line color, downcases and converts to symbol to refer to specific line hash
+destination_line = (gets.chomp.downcase+ '_line').to_sym
+#takes destination line color, downcases and converts to symbol to refer to specific line hash
 
 puts 'What is your Destination Stop?'
-  destination_stop = gets.chomp.downcase
+destination_stop = gets.chomp.downcase
 #takes stop, downcases and converts to symbol to refer to specific array string
 
 
 if origin_line == destination_line
-  distance= (subway[origin_line].index(origin_stop) - subway[destination_line].index(destination_stop)).abs
-puts distance
+  same_distance= (subway[origin_line].index(origin_stop) - subway[destination_line].index(destination_stop)).abs
+  puts same_distance
+#if you're on the same line, evaluates the stops from each destination
 
-#if your stops are on the same line, just evaluate the distance
+else
+  intersection = 'park street'
 
+  distance_origin_line= (subway[origin_line].index(intersection) - subway[origin_line].index(origin_stop)).abs
+  distance_destination_line = (subway[destination_line].index(intersection) - subway[destination_line].index(destination_stop)).abs
+  #evaluates number of stops between stations on different lines, accounting for park street intersection
+  #number of stops between you and park street, and the number of stops between park street and your destination
+
+  diff_dis = distance_origin_line + distance_destination_line
+  puts diff_dis
+  #adds and puts the sum of each number of stops
 end
