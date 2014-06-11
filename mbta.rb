@@ -67,13 +67,20 @@ end
 
 
 start_pos= 'Haymarket'
-end_pos = 'Downtown Crossing'
-start_line = 'Orange'.downcase.to_sym
-end_line = 'Orange'.downcase.to_sym
+end_pos = 'Central'
+start_line = 'Green'.downcase.to_sym
+end_line = 'Red'.downcase.to_sym
 
 
 
-puts find_intersection(subway)
+intersection = find_intersection(subway)
+
+if (start_line != end_line)
+  puts stops_in_same_line(start_pos, intersection, start_line, subway) +
+    stops_in_same_line(intersection, end_pos, end_line, subway)
+else
+  puts stops_in_same_line(start_pos, end_pos, start_line, subway)
+end
 
 
 
