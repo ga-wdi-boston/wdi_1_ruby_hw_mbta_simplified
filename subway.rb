@@ -53,3 +53,5 @@ if loc_line == dest_line
     total_stops = first_line_stops + transfer_line_stops
   end
 
+  puts "In total, you will travel #{total_stops} stops."
+
