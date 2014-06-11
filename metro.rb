@@ -27,7 +27,8 @@ end
 
 # get start_station
 until metro[start_line].index(start_station)
-  puts "Enter your start station (#{metro[start_line]} are the stations):"
+  puts "Enter your start station: "
+  puts "(\"#{metro[start_line].join('", "')}\" are the stations)"
   start_station = gets.chomp.downcase
 end
 
@@ -39,7 +40,8 @@ end
 
 # get end_station
 until metro[end_line].index(end_station)
-  puts "Enter your destination station (#{metro[end_line]} are the stations):"
+  puts "Enter your destination station: "
+  puts "(\"#{metro[end_line].join('", "')}\" are the stations)"
   end_station = gets.chomp.downcase
 end
 
