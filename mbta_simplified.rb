@@ -40,27 +40,28 @@ intersection = 'Parkstreet'
 
 #Prompt the user and check the inputs.
 origin_line = ''
+#Assume there's a key. So this will be !true.
 while !mbta.has_key?(origin_line)
-puts "Enter your origin line (Everything in lowercase): "
-origin_line = gets.chomp.to_sym
+  puts "Enter your origin line (Everything in lowercase): "
+  origin_line = gets.chomp.to_sym
 end
 
 origin_stop = ''
 while !mbta[origin_line].include? origin_stop
-puts "Enter your origin stop (Everything in lowercase): "
-origin_stop = gets.chomp.capitalize
+  puts "Enter your origin stop (Everything in lowercase): "
+  origin_stop = gets.chomp.capitalize
 end
 
 destination_line = ''
 while !mbta.has_key?(destination_line)
-puts "Enter your destination line (Everything in lowercase): "
-destination_line = gets.chomp.to_sym
+  puts "Enter your destination line (Everything in lowercase): "
+  destination_line = gets.chomp.to_sym
 end
 
 destination_stop = ''
 while !mbta[destination_line].include? destination_stop
-puts "Enter your destination stop (Everything in lowercase): "
-destination_stop = gets.chomp.capitalize
+  puts "Enter your destination stop (Everything in lowercase): "
+  destination_stop = gets.chomp.capitalize
 end
 
 #This method find index of each station
