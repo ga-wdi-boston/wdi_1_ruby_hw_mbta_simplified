@@ -44,16 +44,25 @@ lines = ["Red", "Green", "Orange"]
 
 # puts "You travelled #{distance_travelled} stops"
 
+
+#set default value of current station
 current_station = origin_station
 
-
+#find the correlating entry for the current station
 current_station = stations.find do |station|
   station.include?(current_station.to_sym)
 end
 
-stations.select do |key, value|
+#return the current station's line
+current_station.last[:line]
+
+#find all stations that are on the origin_line
+origin_line_stations = stations.select do |key, value|
   value.value?(origin_line.downcase)
 end
+
+#return the index of the current station
+current_station_index = origin_line_stations.keys.index(origin_station.to_sym)
 
 binding.pry
 
