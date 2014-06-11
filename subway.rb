@@ -43,3 +43,6 @@ while !underground[dest_line].index(destination)
   puts "Please select a valid stop on the #{dest_line}"
   destination = gets.chomp
 end
+
+if loc_line == dest_line
+
