@@ -7,6 +7,7 @@ mbta = {
   orangeline: ['Northstation','Haymarket','Parkstreet','Statestreet','Downtowncrossing','Chinatown','Tuftsmedicalcenter']
 }
 
+intersection = Parkstreet
 # #TestCase#1
 # puts "Enter your origin line"
 # origin_line = 'redline'.to_sym
@@ -67,10 +68,10 @@ if origin_line == destination_line
 
 else
   origin_stop_index = station_index(origin_line,origin_stop,mbta)
-  origin_intersection_index = station_index(origin_line,'Parkstreet',mbta)
+  origin_intersection_index = station_index(origin_line,intersection,mbta)
 
   destination_stop_index = station_index(destination_line,destination_stop,mbta)
-  destination_intersection_index = station_index(destination_line,'Parkstreet',mbta)
+  destination_intersection_index = station_index(destination_line,intersection,mbta)
 
   distance = ((origin_stop_index - origin_intersection_index) + (destination_stop_index - destination_intersection_index)).abs
 
