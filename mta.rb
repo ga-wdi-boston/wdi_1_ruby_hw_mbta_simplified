@@ -1,8 +1,8 @@
 require 'pry'
 
-red = ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall', 'Park', 'South Station']
-green = ['Copley', 'Arlington', 'Boylston', 'Park Street', 'Government Center', 'Haymarket']
-orange = ['Tufts', 'Chinatown', 'Downtown Crossing', 'State Street', 'Park Street', 'Haymarket', 'North Station']
+#red = ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall', 'Park', 'South Station']
+#green = ['Copley', 'Arlington', 'Boylston', 'Park Street', 'Government Center', 'Haymarket']
+#orange = ['Tufts', 'Chinatown', 'Downtown Crossing', 'State Street', 'Park Street', 'Haymarket', 'North Station']
 
 lines = {
   red: ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall', 'Park', 'South Station'],
@@ -19,20 +19,26 @@ origin_stop = "Davis".to_sym
 
 # print "Enter the destination line: "
 # change red to = gets.chomp.to_sym
-destination_line = 'red'.to_sym
+destination_line = "red".to_sym
 
 # print "Enter the destination stop: "
 # change Kendall to = gets.chomp.to_sym
-destination_stop = "Kendall"
+destination_stop = "Kendall".to_sym
 
 
 # lines[origin_line] returns the array of stops on given line
 # index(origin_stop) searches for the index of the origin_stop provided
-origin_index = lines[origin_line].index(origin_stop)
-destination_index = lines[destination_line].index(destination_stop)
+origin_index = lines[origin_line].index("Davis")
+destination_index = lines[destination_line].index("Kendall")
 
 # simple case, both origin and destination stops are on the same line.
-number_of_stops = (origin_index - destination_index).abs
+# use abs because you don't ever want to get a negative number
+number_of_stops_same_line = (destination_index - origin_index).abs
 
 binding.pry
+
+# more complex, origin & destination stops are on different lines
+#number_of_stops_switch_lines = (origin_index - destination_index).abs + (origin_index - destination_index).abs
+
+
 
