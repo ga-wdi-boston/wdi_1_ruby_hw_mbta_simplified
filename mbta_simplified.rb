@@ -7,7 +7,7 @@ mbta = {
   orangeline: ['Northstation','Haymarket','Parkstreet','Statestreet','Downtowncrossing','Chinatown','Tuftsmedicalcenter']
 }
 
-intersection = Parkstreet
+intersection = 'Parkstreet'
 # #TestCase#1
 # puts "Enter your origin line"
 # origin_line = 'redline'.to_sym
