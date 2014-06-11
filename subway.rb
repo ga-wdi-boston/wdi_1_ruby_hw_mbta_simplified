@@ -36,3 +36,8 @@ end
 
 puts "What is your destination stop?"
 destination = gets.chomp
+while !underground[dest_line].index(destination)
+  puts "That is not a valid stop on the #{dest_line}"
+  puts "Please select a valid stop on the #{dest_line}"
+  destination = gets.chomp
+end
