@@ -10,14 +10,19 @@ lines = {
   orange: ['Tufts', 'Chinatown', 'Downtown Crossing', 'State Street', 'Park Street', 'Haymarket', 'North Station']
 }
 # print "Enter the origin line: "
-# origin_line = gets.chomp.to_sym
+# change red to = gets.chomp.to_sym
 origin_line = "red".to_sym
 
 # print "Enter the origin stop: "
-# origin_stop = gets.chomp.to_sym
-origin_stop = "Davis"
+# change Davis to = gets.chomp.to_sym
+origin_stop = "Davis".to_sym
 
+# print "Enter the destination line: "
+# change red to = gets.chomp.to_sym
 destination_line = 'red'.to_sym
+
+# print "Enter the destination stop: "
+# change Kendall to = gets.chomp.to_sym
 destination_stop = "Kendall"
 
 
@@ -30,12 +35,4 @@ destination_index = lines[destination_line].index(destination_stop)
 number_of_stops = (origin_index - destination_index).abs
 
 binding.pry
-# origin_line = gets.chomp
-# origin_stop = gets.chomp
 
-#puts "Please enter your origin line #{origin_line} and your origin_stop #{origin_stop}:"
-
-# destination_line = gets.chomp
-# destination_stop = gets.chomp
-
-#puts "Please enter your destination line #{destination_line} and your destination_stop #{destination_stop}:"
