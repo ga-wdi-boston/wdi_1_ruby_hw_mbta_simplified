@@ -9,3 +9,6 @@ subway = {
 
 puts "Please choose an origin stop"
 origin = gets.chomp
+
+puts "Please choose a destination :"
+dest = gets.chomp
