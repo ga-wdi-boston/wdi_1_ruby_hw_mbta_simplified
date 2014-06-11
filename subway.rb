@@ -7,8 +7,11 @@ subway = {
     "Chinatown", "Tufts Medical Center"]
 }
 
+puts "Please choose a subway line"
+line1 = gets.chomp
 puts "Please choose an origin stop"
 origin = gets.chomp
 
 puts "Please choose a destination :"
 dest = gets.chomp
+
