@@ -1,6 +1,6 @@
 subway = #creates HASH for unordered lines, and nested arrays for corresponding, ordered stops
   {
-    red_line:['alewife','davis','porter','harvard','central kendall/mit','park street','south station'],
+    red_line:['alewife','davis','porter','harvard','central', 'kendall/mit','park street','south station'],
     green_line:['haymarket','government center','park street','boylston','arlington','copley'],
     orange_line:['north station','haymarket','park street','state street','downtown crossing','chinatown','tufts medical center']
   }
