@@ -61,20 +61,32 @@ def find_intersection(the_subway)
 end
 
 
+puts "What is the color line that you will be starting at?"
+until subway.key?(start_line = gets.chomp.downcase.to_sym) do
+  puts "That's not a valid line. Please enter only the color."
+end
 
+puts "What is the station which you would like to start at?"
+until subway[start_line].include?(start_pos =
+    gets.chomp.split.map(&:capitalize).join(' ')) do
+  puts "That's not a station on the #{start_line.to_s} line."
+end
 
+puts "What is the line of your ending station?"
+until subway.key?(end_line = gets.chomp.downcase.to_sym) do
+  puts "That's not a valid line. Please enter only the color."
+end
 
-
-
-start_pos= 'Haymarket'
-end_pos = 'Central'
-start_line = 'Green'.downcase.to_sym
-end_line = 'Red'.downcase.to_sym
-
+puts "What is the name of the station which you will be ending at?"
+until subway[end_line].include?(end_pos =
+    gets.chomp.split.map(&:capitalize).join(' ')) do
+  puts "That's not a station on the #{end_line.to_s} line."
+end
 
 
 intersection = find_intersection(subway)
 
+print "Number of stops to get from #{start_pos} to #{end_pos}: "
 if (start_line != end_line)
   puts stops_in_same_line(start_pos, intersection, start_line, subway) +
     stops_in_same_line(intersection, end_pos, end_line, subway)
