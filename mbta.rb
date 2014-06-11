@@ -27,25 +27,9 @@ orange_line_stops = ['North Station',
 
 subway = {red: red_line_stops, green: green_line_stops, orange: orange_line_stops}
 
-
-
 def stops_in_same_line(start_stop, end_stop, line, the_subway)
-  stop_count = 0
 
-  the_subway[line].rotate(the_subway[line].index(start_stop)).each do | stop |
-
-    if stop == end_stop
-      break
-    end
-
-    stop_count += 1
-  end
-
-  if stop_count > the_subway[line].length / 2
-    stop_count = the_subway[line].length - stop_count
-  end
-
-  stop_count
+  return (the_subway[line].index(start_stop) - the_subway[line].index(end_stop)).abs
 
 end
 
