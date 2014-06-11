@@ -25,6 +25,11 @@ if intersections.length > 1
   exit
 end
 
+if intersections.length == 0
+  puts "ERROR: There is no transfer station!"
+  exit
+end
+
 intersection = intersections[0]
 
 # User-input information
