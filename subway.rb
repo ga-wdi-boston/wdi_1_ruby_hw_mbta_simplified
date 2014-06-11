@@ -50,4 +50,6 @@ if loc_line == dest_line
   else
     first_line_stops = (underground[loc_line].index(location) - underground[loc_line].index(transfer_stop)).abs
     transfer_line_stops = (underground[dest_line].index(transfer_stop) - underground[dest_line].index(destination)).abs
+    total_stops = first_line_stops + transfer_line_stops
+  end
 
