@@ -28,6 +28,16 @@ intersection = 'Parkstreet'
 # puts "Enter your destination stop"
 # destination_stop = 'Haymarket'
 
+# #TestCase#3
+# puts "Enter your origin line"
+# origin_line = 'redline'.to_sym
+# puts "Enter your origin stop"
+# origin_stop = 'Porter'
+# puts "Enter your destination line"
+# destination_line = 'greenline'.to_sym
+# puts "Enter your destination stop"
+# destination_stop = 'Copley'
+
 #Prompt the user and check the inputs.
 origin_line = ''
 while !mbta.has_key?(origin_line)
@@ -73,7 +83,7 @@ else
   destination_stop_index = station_index(destination_line,destination_stop,mbta)
   destination_intersection_index = station_index(destination_line,intersection,mbta)
 
-  distance = ((origin_stop_index - origin_intersection_index) + (destination_stop_index - destination_intersection_index)).abs
+  distance = ((origin_stop_index - origin_intersection_index).abs + (destination_stop_index - destination_intersection_index)).abs
 
 end
 
