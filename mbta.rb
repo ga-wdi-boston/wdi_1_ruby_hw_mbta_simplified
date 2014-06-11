@@ -58,6 +58,7 @@ end_line = nil
 end_station = nil
 
 puts "DESTINATION INFORMATION"
+
 until charlie_map.key? end_line
   print "Line: "
   end_line = gets.chomp.downcase.to_sym
@@ -75,9 +76,9 @@ until charlie_map[end_line].include? end_station
 end
 
 def leg_distance(map, line, start, destination)
-  start_index = map[line].index(start)
-  end_index = map[line].index(destination)
-  return (start_index - end_index).abs
+  first_index = map[line].index(start)
+  second_index = map[line].index(destination)
+  return (first_index - second_index).abs
 end
 # I suspect this is inefficient, because I have to keep typing the map name
 # But it works!
@@ -104,4 +105,3 @@ puts "There are #{stops_between} stops between #{origin_station.capitalize} and 
 if origin_line != end_line
   puts "You will need to transfer at " + intersection.capitalize
 end
-
