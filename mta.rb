@@ -5,27 +5,28 @@ lines = {
   green: ['Copley', 'Arlington', 'Boylston', 'Park Street', 'Government Center', 'Haymarket'],
   orange: ['Tufts', 'Chinatown', 'Downtown Crossing', 'State Street', 'Park Street', 'Haymarket', 'North Station']
 }
-# print "Enter the origin line: "
-# change red to = gets.chomp.to_sym
-origin_line = "red".to_sym
 
-# print "Enter the origin stop: "
+print "This is the MBTA Stop Calculator App. Please enter the origin line: "
+# change red to = gets.chomp.to_sym
+origin_line = gets.chomp.downcase.to_sym
+
+print "Please enter the origin stop: "
 # change Davis to = gets.chomp.to_sym
-origin_stop = "Park Street".to_sym
+origin_stop = gets.chomp.upcase.to_sym
 
-# print "Enter the destination line: "
+print "Please enter the destination line: "
 # change red to = gets.chomp.to_sym
-destination_line = "red".to_sym
+destination_line = gets.chomp.downcase.to_sym
 
-# print "Enter the destination stop: "
+print "Please enter the destination stop: "
 # change Kendall to = gets.chomp.to_sym
-destination_stop = "Park Street".to_sym
+destination_stop = gets.chomp.upcase.to_sym
 
 
 # lines[origin_line] returns the array of stops on given line
 # index(origin_stop) searches for the index of the origin_stop provided
-origin_index = lines[origin_line].index("Park Street")
-destination_index = lines[destination_line].index("Park Street")
+origin_index = lines[origin_line].index("Davis")
+destination_index = lines[destination_line].index("Haymarket")
 
 # simple case, both origin and destination stops are on the same line.
 # use abs because you don't ever want to get a negative number
