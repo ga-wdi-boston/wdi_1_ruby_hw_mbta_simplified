@@ -1,9 +1,5 @@
 require 'pry'
 
-#red = ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall', 'Park', 'South Station']
-#green = ['Copley', 'Arlington', 'Boylston', 'Park Street', 'Government Center', 'Haymarket']
-#orange = ['Tufts', 'Chinatown', 'Downtown Crossing', 'State Street', 'Park Street', 'Haymarket', 'North Station']
-
 lines = {
   red: ['Alewife', 'Davis', 'Porter', 'Harvard', 'Central', 'Kendall', 'Park Street', 'South Station'],
   green: ['Copley', 'Arlington', 'Boylston', 'Park Street', 'Government Center', 'Haymarket'],
