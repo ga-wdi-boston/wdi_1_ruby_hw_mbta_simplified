@@ -49,14 +49,31 @@ def stops_in_same_line(start_stop, end_stop, line, the_subway)
 
 end
 
+def find_intersection(the_subway)
+
+  the_subway[the_subway.keys[0]].each do | stop |
+    found = true
+    the_subway.each_value do | line |
+      found = false unless line.include?(stop)
+    end
+    return stop if found
+  end
+end
+
+
+
+
+
+
+
 start_pos= 'Haymarket'
 end_pos = 'Downtown Crossing'
 start_line = 'Orange'.downcase.to_sym
 end_line = 'Orange'.downcase.to_sym
 
 
-puts stops_in_same_line(start_pos,end_pos,start_line,subway)
 
+puts find_intersection(subway)
 
 
 
