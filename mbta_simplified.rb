@@ -9,11 +9,14 @@ red_line = {name: 'Red Line', stations: red_line_stations}
 green_line = {name: 'Green Line', stations: green_line_stations}
 orange_line = {name: 'Orange Line', stations: orange_line_stations}
 
+# We must ensure that the intersection station exists on all lines
 intersection = 'Park Street'
 
+# Variables used for user prompts
 station_control = [red_line, green_line, orange_line]
 line_control = [red_line[:name], green_line[:name], orange_line[:name]]
 
+# Returns array index based on partial names, or nil if none found
 def get_key(str, arr)
   i = 0;
   arr.each do |e|
@@ -34,6 +37,7 @@ until key != nil
 end
 origin_line = station_control.at(key)
 puts
+# binding.pry
 
 # Get the origin station
 select_station = origin_line[:stations].join(', ')
@@ -46,6 +50,7 @@ end
 origin_intersection_key = origin_line[:stations].find_index(intersection)
 origin_distance = (origin_station_key - origin_intersection_key).abs
 puts
+# binding.pry
 
 # Get the destination line
 print "Enter your destination line (#{select_line}): "
@@ -68,6 +73,7 @@ end
 dest_intersection_key = dest_line[:stations].find_index(intersection)
 dest_distance = (dest_station_key - dest_intersection_key).abs
 puts
+# binding.pry
 
 # Compute and return the total number of stops
 if origin_line != dest_line
