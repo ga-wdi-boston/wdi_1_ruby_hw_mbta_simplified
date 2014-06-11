@@ -17,6 +17,7 @@ def station_check(subway, line, stop)
 
   if !station_exists
     puts "That is not a valid station"
+    puts "Please select a valid station"
     stop = gets.chomp.downcase
     stop = station_check(subway, line, stop)
   else
@@ -37,14 +38,25 @@ puts "Select origin line: (green, red, or orange)"
 origin_line = (gets.chomp.downcase << '_line').to_sym
 origin_line = line_check(subway, origin_line)
 
+puts
+puts "Here are the stations for the #{origin_line}"
+puts
+puts subway[origin_line]
+puts
 puts "Select origin stop: "
 origin_stop = gets.chomp.downcase
 origin_stop = station_check(subway, origin_line, origin_stop)
 
+puts
 puts "Select destination line: (green, red, or orange)"
 destination_line = (gets.chomp.downcase << '_line').to_sym
 destination_line = line_check(subway, destination_line)
 
+puts
+puts "Here are the stations for the #{destination_line}"
+puts
+puts subway[destination_line]
+puts
 puts "Select destination stop: "
 destination_stop = gets.chomp.downcase
 destination_stop = station_check(subway, destination_line, destination_stop)
@@ -52,10 +64,6 @@ destination_stop = station_check(subway, destination_line, destination_stop)
 #Manually set intersection stop
 
 intersection_stop = "park street"
-
-#Code to ensure the user input is correct
-
-
 
 # Calculation for distance between stops on different lines with intersection stop
 if origin_line != destination_line
@@ -66,4 +74,6 @@ else
   num_stops = (subway[destination_line].index(destination_stop) - subway[origin_line].index(origin_stop)).abs
 end
 
-puts num_stops
+puts
+puts "Your journey will take #{num_stops} stops"
+
