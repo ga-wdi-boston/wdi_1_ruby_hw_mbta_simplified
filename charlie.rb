@@ -8,33 +8,32 @@ orange_line = ["North Station", "Haymarket", "Park", "State", "Downtown Crossing
 mta_lines = { red: red_line, green: green_line, orange: orange_line }
 
 #center stop determination
-centers_list = red_line & green_line & orange_line
-if centers_list.length == 1
-  center_stop = centers_list.to_s.to_s
-  # !puts here works but shows brackets around #{center_stop} ????
-  puts " With current MTA map, the intersection stop is set to #{center_stop}, proceed."
-else
+center_stop = red_line & green_line & orange_line
+if center_stop.length == 1
+  center_stop = center_stop[0]
+  puts "With current MBTA map, the intersection stop is set to #{center_stop}, proceed."
+  puts
   # Want to add functionality to allow string entry
   # then check if entry is present in centers list
     # use conditional to set center stop to point to the index the entry matches
     # then set center stop to the string version of matched array index item
   # Otherwise give error message and allow new entry
-  puts "Please select 1 intersection stop from #{centers_list} by its' index"
+else
+  puts "Please select 1 intersection stop from #{centers_list} by its' index number"
   list_selection = gets.chomp.to_i
   centers_list[list_selection] = center_stop
   puts "The sole intersection is set to #{center_stop}"
+  puts
 end
 # puts "You're now Charlie on the MTA, calculate your ride stops!"
-## potential new method Symbolize to .downcase.to_sym anything needed,
-# keeps user input as a string for viewing if needed
 # puts "Please enter an origin line color : "
 o_line = "Red".downcase.to_sym
 # puts "Please enter an origin stop: "
-o_stop = "Davis"
+o_stop = "Park".capitalize
 # puts "Please enter an destination line color: "
 d_line = "Red".downcase.to_sym
 # puts "Please enter an destination stop: "
-d_stop = "Davis"
+d_stop = "Davis".to_s
 
 # positions, finds index value for line and stop on o & d
 origin_pos = mta_lines[o_line].index(o_stop)
@@ -56,4 +55,5 @@ else
   trip_distance = ((origin_pos - intersect1).abs) + ((dest_pos - intersect2).abs)
 end
 
-puts trip_distance
+puts "With origin line color #{o_line.capitalize}, origin stop #{o_stop} and destination line color #{d_line.capitalize}, destination stop #{d_stop} your trip distance will be #{trip_distance} stop(s). Enjoy your journey!"
+
