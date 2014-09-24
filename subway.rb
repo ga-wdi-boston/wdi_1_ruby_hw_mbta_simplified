@@ -1,3 +1,5 @@
+intersection = "Park Street"
+
 train_lines = {
             redline: [
                         "Alewife",
@@ -17,7 +19,8 @@ train_lines = {
                         "Arlington",
                         "Copley"
             ],
-            northstation: [
+            orangeline: [
+                        "North Station",
                         "Haymarket",
                         "Park Street",  #intersection
                         "State Street",
@@ -36,5 +39,6 @@ destination_line = gets.chomp.to_sym
 puts "Enter destination stop:"
 destination_stop = gets.chomp
 
-puts train_lines[origin_line].index(origin_stop) - train_lines[origin_line].index(origin_stop)
-
+leg1 = (train_lines[origin_line].index(origin_stop) - train_lines[origin_line].index(intersection)).abs
+leg2 = (train_lines[destination_line].index(intersection) - train_lines[destination_line].index(destination_stop)).abs
+puts leg1 + leg2
