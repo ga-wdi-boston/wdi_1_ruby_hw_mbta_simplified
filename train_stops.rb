@@ -33,3 +33,7 @@ def ask_for_final_end
 	puts "What station do you stop at completely?"
 	gets.chomp
 end
+
+def calculate_distance(first_station_position, second_station_position)#technically this will just be counting stops; needs index positions from a single array
+	
+end
