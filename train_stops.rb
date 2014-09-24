@@ -3,9 +3,18 @@
 red_line = ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"]
 green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
 orange_line = ["North Station", "Haymarket", "Park Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
-all_stops = []#current plan basically involves storing a string and later using the split method to get the different parts out of the string
+all_stops = []#saving station names here
+both_lines = []#saving the lines that are used
+def ask_for_origin_line
+	puts "What line are you using originally?"
+	gets.chomp
+end
+def ask_for_origin_start
+	puts "What station do you start at in the train system?"
+	gets.chomp
+end
 
-def ask_for_origin_start#need to get an array name and a position in the array
-	puts "Where do you originally start in the train system? red/green/orange [insert station name here]"# I need the user to input something like red Park Street; maybe use method to change to lowercase before checking with ifs where they are?
+def ask_for_origin_end
+	puts "What stop are getting off at to take a connecting train to your final destination?"
 	gets.chomp
 end
