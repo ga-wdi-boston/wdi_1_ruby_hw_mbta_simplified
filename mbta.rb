@@ -16,4 +16,13 @@ def distance_same_line(start_stop, finish_stop, line, map)
   distance = (map[line].index(start_stop) - map[line].index(finish_stop)).abs
 end
 
-puts distance_same_line("Alewife", "South Station", :red_line, subway_map)
+# puts distance_same_line("Alewife", "South Station", :red_line, subway_map)
+
+def distance_from_park(start_stop, line, map)
+  distance = (map[line].index(start_stop) - map[line].index("Park Street")).abs
+end
+
+# puts distance_from_park("Haymarket", :green_line, subway_map)
+
+# def distance_different_lines(start_stop, start_line, finish_stop, finish_line, map)
+
