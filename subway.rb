@@ -30,10 +30,21 @@ train_lines = {
             ]
 }
 
+def get_line(train_lines, station)
+      if train_lines[:redline].include?(station)
+            puts "redline"
+      elsif train_lines[:greenline].include?(station)
+            puts "greenline"
+      elsif train_lines[:orangeline].include?(station)
+            puts "orangeline"
+      end
+end
+
 puts "Enter origin line:"
 origin_line = gets.chomp.to_sym
 puts "Enter origin stop:"
 origin_stop = gets.chomp
+get_line(train_lines, origin_stop)
 puts "Enter destination line:"
 destination_line = gets.chomp.to_sym
 puts "Enter destination stop:"
