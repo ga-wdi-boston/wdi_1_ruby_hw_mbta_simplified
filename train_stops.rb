@@ -5,7 +5,7 @@ all_stops = []#saving station names here
 both_lines = []#saving the lines that are used
 #They are all going to have Park Street in a stop on both lines. The end for the original and the start for the final.
 def ask_for_origin_line
-	puts "What line are you using originally?"
+	puts "What train line are you using originally?"
 	gets.chomp
 end
 def ask_for_origin_start
@@ -19,7 +19,7 @@ def ask_for_origin_end
 end
 
 def ask_for_final_line
-	puts "What line are you going to connect to?"
+	puts "What train line are you going to connect to?"
 	gets.chomp
 end
 
@@ -50,11 +50,12 @@ def find_the_stop_index(the_line, stop_name)
 	if the_line == "red"
 		return red_line.index(stop_name)
 	elsif the_line == "green"
-		
+		return green_line.index(stop_name)
 	elsif the_line == "orange"
-
+		return orange_line.index(stop_name)
 	else
-		puts "Error there appears to be a mistake in your line choice."			
+		puts "Error there appears to be a mistake in your line choice."
+		exit			
 	end
 end
 
@@ -62,7 +63,18 @@ both_lines[0] = ask_for_origin_line
 all_stops[0] = ask_for_origin_start
 all_stops[1] = ask_for_origin_end
 origin_index_save = []
+
 origin_index_save[0] = find_the_stop_index(both_lines[0], all_stops[0])
 origin_index_save[1] = find_the_stop_index(both_lines[0], all_stops[1])
+origin_distance = calculate_distance(origin_index_save[0], origin_index_save[1])
+
+both_lines[1] = ask_for_final_line
+all_stops[2] = ask_for_final_start
+all_stops[3] = ask_for_final_end
+final_index_save = []
+
+final_index_save[0] = find_the_stop_index(both_lines[1], all_stops[2])
+final_index_save[1] = find_the_stop_index(both_lines[1], all_stops[3])
+final_distance = calculate_distance(final_index_save[0], final_index_save[1])
 
 #puts origin_index_save; used to check origin_index_save
