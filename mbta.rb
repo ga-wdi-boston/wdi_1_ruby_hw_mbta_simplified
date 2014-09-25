@@ -31,5 +31,8 @@ def distance_different_lines(start_stop, start_line, finish_stop, finish_line, m
   distance_from_park(start_stop, start_line, map) + distance_from_park(finish_stop, finish_line, map)
 end
 
-puts distance_different_lines("Alewife", :red_line, "Haymarket", :green_line, subway_map) # => 8
+# puts distance_different_lines("Alewife", :red_line, "Haymarket", :green_line, subway_map) # => 8
+puts distance_different_lines("Park Street", :red_line, "Park Street", :green_line, subway_map) # Edge case test 1: same station
+puts distance_different_lines("Park Street", :green_line, "Davis", :red_line, subway_map) # Edge case test 1
+
 
