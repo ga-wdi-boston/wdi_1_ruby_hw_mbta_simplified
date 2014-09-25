@@ -12,15 +12,45 @@ describe MBTA do
 
   describe "#distance" do
     it "can find the distance between two stops on the same line" do
-      expect(@mbta.distance([:red, 'Alewife'],[:red, 'Harvard'])).to eq 3
+      trip = {
+        origin: {
+          line: :red,
+          stop: 'Alewife'
+        },
+        destination: {
+          line: :red,
+          stop: 'Harvard'
+        }
+      }
+      expect(@mbta.distance(trip)).to eq 3
     end
 
     it "can find the distance between two stops on different lines" do
-      expect(@mbta.distance([:red, 'Alewife'],[:green, 'Boylston'])).to eq 7
+      trip = {
+        origin: {
+          line: :red,
+          stop: 'Alewife'
+        },
+        destination: {
+          line: :green,
+          stop: 'Boylston'
+        }
+      }
+      expect(@mbta.distance(trip)).to eq 7
     end
 
     it "gives the correct distance when starts and ends at same stop" do
-      expect(@mbta.distance([:red, 'Park Street'], [:green, 'Park Street'])).to eq 0
+      trip = {
+        origin: {
+          line: :red,
+          stop: 'Park Street'
+        },
+        destination: {
+          line: :green,
+          stop: 'Park Street'
+        }
+      }
+      expect(@mbta.distance(trip)).to eq 0
     end
   end
 end
