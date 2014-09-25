@@ -1,6 +1,12 @@
 # need a way of assigning values to stops (k/v)
 # store stops in array, stops at index
 # absolute value function to turn negative numbers into positive
+# if they are the same, just find values for each key and subtract using absolute value
+# puts absolute value
+# if lines are not the same, find the value of each, subtract to park street of respective line and add together absolute values
+# if this doesn't work in method, remove method
+
+
 
 require 'pry'
 
@@ -34,58 +40,39 @@ mbta_lines = {
 
 puts "Hi there! I'd love to help you figure out how far your commute is."
 
-# def getting_stations (first_line, second_line)
-puts "Which line will you begin on? (Red, Green, or Orange)"
-first_line = gets.chomp.downcase
-  if first_line == "red"
-    return :red
-  elsif first_line == "green"
-    return :greem
-  elsif first_line == "orange"
-    return :orange
-  end
-
-puts "Which station will you start at?"
-first_station = gets.chomp.downcase
-
-puts "Which line will you end on?"
-second_line = gets.chomp.downcase
-  if second_line == "red"
+# getting user lines and stations
+def getting_stations (first_line, second_line)
+  puts "Which line will you begin on? (Red, Green, or Orange)"
+  first_line = gets.chomp.downcase
+    if first_line == "red"
+      return :red
+    elsif first_line == "green"
+      return :greem
+    elsif first_line == "orange"
+      return :orange
+    end
+  puts "Which station will you start at?"
+  first_station = gets.chomp.downcase
+  puts "Which line will you end on?"
+  second_line = gets.chomp.downcase
+    if second_line == "red"
       return :red
     elsif second_line == "green"
       return :greem
     elsif second_line == "orange"
       return :orange
     end
+  puts "Which station will you end at?"
+  second_station = gets.chomp.downcase
+end
 
-puts "Which station will you end at?"
-second_station = gets.chomp.downcase
-# end
-
-
-def commute(first_line, first_station, second_line, second_station)
- if first_line == second_line
-  puts
-
+def commute(line1, station1, line2, station2)
+  if line1 == line2
+    num_stops = mbta_lines[line1].index(station1) - mbta_lines[line1].index(station2)
+    puts num_stops.abs
 end
 
 
-puts mbta_lines[0][red]["davis"]
-
-#   num_of_stops_single = mbta_lines[first_line][first_station].to_i - mbta_lines[first_line][second_station].to_i
-
-# puts num_of_stops_single
-
-# binding.pry
-
-
-
-  # if they are the same, just find values for each key and subtract using absolute value
-  # puts absolute value
-
-  # if lines are not the same, find the value of each, subtract to park street of respective line and add together absolute values
-
-  # if this doesn't work in method, remove method
 
 
 
