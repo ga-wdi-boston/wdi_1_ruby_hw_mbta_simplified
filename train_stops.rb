@@ -38,6 +38,7 @@ def calculate_distance(first_station_position, second_station_position)#technica
 end
 
 def total_distance(first_distance, second_distance)
+	puts "You'll have to travel"
 	first_distance + second_distance
 end
 
@@ -76,5 +77,7 @@ final_index_save = []
 final_index_save[0] = find_the_stop_index(both_lines[1], all_stops[2])
 final_index_save[1] = find_the_stop_index(both_lines[1], all_stops[3])
 final_distance = calculate_distance(final_index_save[0], final_index_save[1])
+
+puts total_distance(origin_distance, final_distance).to_s + " stops"
 
 #puts origin_index_save; used to check origin_index_save
