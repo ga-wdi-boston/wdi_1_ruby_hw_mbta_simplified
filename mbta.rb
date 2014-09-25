@@ -53,22 +53,29 @@ Use methods to make your code better, with each method doing a single and small 
 
 require 'pry'
 
-# maybe an array of subway lines with stops collected in hashes for each line?
+# thinking maybe there's a way to take user's selection and modify/shift arrays so that user's stop becomes 0 in the indices
+mbta = {
+  red: ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"]
+  green: ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
+  orange: ["North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
+}
+
+
 
 # FOUR USER INPUTS: origin_line, origin_stop, destination_line, destination_stop
 
 puts "Let me tell you how many stops you will be traveling on this trip. Please supply me with the following information."
 
-puts "Origin line: "
-origin_line = gets.chomp.capitalize
+puts "Color of the T line you are starting on: "
+origin_line = gets.chomp.downcase
 
-puts "Origin stop: "
-origin_stop = gets.chomp.capitalize
+puts "Full name of the stop you are starting at: "
+origin_stop = gets.chomp.downcase
 
-puts "Destination line: "
-destination_line = gets.chomp.capitalize
+puts "Color of the T line you are getting off of:"
+destination_line = gets.chomp.downcase
 
-puts "Destination stop: "
-destination_stop = gets.chomp.capitalize
+puts "Full name of the stop you are getting off at: "
+destination_stop = gets.chomp.downcase
 
 
