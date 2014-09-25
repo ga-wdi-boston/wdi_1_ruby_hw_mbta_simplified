@@ -8,7 +8,7 @@ class MBTA
         'Porter',
         'Harvard',
         'Central',
-        'Kendall/MIT',
+        'Kendall',
         'Park Street',
         'South Station'
       ],
@@ -36,6 +36,19 @@ class MBTA
     'Park Street'
   end
 
+  def trip(origin_line, origin_stop, destination_line, destination_stop)
+    {
+      origin: {
+        line: origin_line,
+        stop: origin_stop
+      },
+      destination: {
+        line: destination_line,
+        stop: destination_stop
+      }
+    }
+  end
+
   def distance(trip)
 
     # The way I see it, since all lines intersect at Park Street,
@@ -56,29 +69,11 @@ class MBTA
     if origin_line == destination_line
       return (position_b - position_a).abs
     else
+
+      origin_trip = self.trip(origin_line, origin_stop, origin_line, self.common_stop)
+      destination_trip = self.trip(destination_line, self.common_stop, destination_line, destination_stop)
+
       # recursion ahoy!
-
-      origin_trip = {
-        origin: {
-          line: origin_line,
-          stop: origin_stop
-        },
-        destination: {
-          line: origin_line,
-          stop: self.common_stop
-        }
-      }
-
-      destination_trip = {
-        origin: {
-          line: destination_line,
-          stop: self.common_stop
-        },
-        destination: {
-          line: destination_line,
-          stop: destination_stop
-        }
-      }
 
       distance_a = distance(origin_trip)
       distance_b = distance(destination_trip)
