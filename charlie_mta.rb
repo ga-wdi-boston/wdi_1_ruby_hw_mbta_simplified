@@ -10,29 +10,32 @@ require 'pry'
 
 
 trip = {
-  red: [  "alewife",
-          "davis",
-          "porter",
-          "harvard",
-          "central",
-          "kendall/mit",
-          "park street",
-          "south station"],
+  red: [
+        "alewife",
+         "davis",
+         "porter",
+         "harvard",
+         "central",
+         "kendall/mit",
+         "park street",
+         "south station"
+         ],
 
-  green: ["haymarket",
+  green: [
+          "haymarket",
           "government center",
           "park street",
           "boylston",
           "arlington",
-          "copley"]
+          "copley"
+          ],
 
-  orange: ["north station",
-          "haymarket",
-          "park street",
-          "state street",
+  orange: [
+          "north station","haymarket", "park street", "state street",
           "downtown crossing",
           "chinatown",
-          "tufts medical center"]
+          "tufts medical center"
+          ]
 }
 
 
@@ -58,7 +61,7 @@ destination_stop = gets.chomp.downcase
 
 before_intersection = trip[origin_line].index(origin_stop) - trip[origin_line].index("park street").abs
 
-after_intersection = trip[destination_line].index() trip[destination_line].index("park street")
+after_intersection = trip[destination_line].index(destination_stop) - trip[destination_line].index("park street")
 
 puts before_intersection + after_intersection
 
