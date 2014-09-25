@@ -5,7 +5,9 @@ mbta = MBTA.new
 def choose_line
   mbta = MBTA.new
   puts "Choose a line."
-  puts mbta.stops.keys
+  mbta.stops.keys.each do |line|
+    puts "\t#{line}"
+  end
   print "> "
   line = gets.chomp.downcase
   while not mbta.stops.keys.include?(line.to_sym)
@@ -19,7 +21,9 @@ end
 def choose_stop(line)
   mbta = MBTA.new
   puts "Choose a stop."
-  puts mbta.stops[line.to_sym]
+  mbta.stops[line.to_sym].each do |stop|
+    puts "\t#{stop}"
+  end
   print "> "
   stop = gets.chomp.split.map { |i| i.capitalize  }.join(" ")
   while not mbta.stops[line.to_sym].include?(stop)
@@ -27,7 +31,10 @@ def choose_stop(line)
     print "> "
     stop = gets.chomp.split.map { |i| i.capitalize  }.join(" ")
   end
-  [line.to_sym, stop]
+  {
+    line: line.to_sym,
+    stop: stop
+  }
 end
 
 puts "Welcome to the MBTA, Simplified!"
@@ -35,4 +42,8 @@ puts "Select your departing stop:"
 origin = choose_stop(choose_line)
 puts "Select your destination:"
 destination = choose_stop(choose_line)
-puts "The distance between these stops is: #{mbta.distance(origin, destination)} stops"
+trip = {
+  origin: origin,
+  destination: destination
+}
+puts "The distance between these stops is: #{mbta.distance(trip)} stops."
