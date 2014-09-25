@@ -1,10 +1,9 @@
 #need ordered methods of keeping data; arrays
 
-red_line = ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"]
-green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
-orange_line = ["North Station", "Haymarket", "Park Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
+
 all_stops = []#saving station names here
 both_lines = []#saving the lines that are used
+#They are all going to have Park Street in a stop on both lines. The end for the original and the start for the final.
 def ask_for_origin_line
 	puts "What line are you using originally?"
 	gets.chomp
@@ -34,6 +33,36 @@ def ask_for_final_end
 	gets.chomp
 end
 
-def calculate_distance(first_station_position, second_station_position)#technically this will just be counting stops; needs index positions from a single array
-	
+def calculate_distance(first_station_position, second_station_position)#technically this will just be counting stops; needs index positions from a single array; they should both be integers
+	(first_station_position - second_station_position).abs
 end
+
+def total_distance(first_distance, second_distance)
+	first_distance + second_distance
+end
+
+def find_the_stop_index(the_line, stop_name)
+
+	red_line = ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"]
+	green_line = ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
+	orange_line = ["North Station", "Haymarket", "Park Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
+
+	if the_line == "red"
+		return red_line.index(stop_name)
+	elsif the_line == "green"
+		
+	elsif the_line == "orange"
+
+	else
+		puts "Error there appears to be a mistake in your line choice."			
+	end
+end
+
+both_lines[0] = ask_for_origin_line
+all_stops[0] = ask_for_origin_start
+all_stops[1] = ask_for_origin_end
+origin_index_save = []
+origin_index_save[0] = find_the_stop_index(both_lines[0], all_stops[0])
+origin_index_save[1] = find_the_stop_index(both_lines[0], all_stops[1])
+
+#puts origin_index_save; used to check origin_index_save
