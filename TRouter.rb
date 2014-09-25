@@ -12,10 +12,20 @@ class TeeRouter
 
   def initialize(string)
     info = string.scan(/\b[\w\s\/]+/im) # => ["...", "...", "...", "..."]
+
+    # --------------------
+    binding.pry
+    # --------------------
+
     parse_array(info)
   end
 
   def parse_array(array)
+
+    # --------------------
+    binding.pry
+    # --------------------
+
     # TODO: make this parsing more eleganter. Measuring for 4 isn't the best way to check for goodness of the input
     good = array.length == 4 ? parse_trip(array) : "Invalid arrival and destination."
   end
@@ -31,6 +41,10 @@ class TeeRouter
     destination = destinations[1].scan(/\b[a-z][\w\s\/]+/i)[0].split.map(&:capitalize)*' '
     origin.sub!(/[\/]+[A-Za-z]+/){ $&.upcase }
     destination.sub!(/[\/]+[A-Za-z]+/){ $&.upcase }
+
+    # --------------------
+    binding.pry
+    # --------------------
 
     route(@@routes[origin_line.to_sym], origin_line, origin,@@routes[destination_line.to_sym], destination_line, destination,)
 
@@ -52,6 +66,10 @@ class TeeRouter
     else
       result = "Something else happened"
     end
+
+    # --------------------
+    binding.pry
+    # --------------------
 
   end
 
