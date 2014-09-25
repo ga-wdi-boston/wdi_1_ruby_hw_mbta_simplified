@@ -16,7 +16,7 @@ describe MBTA do
     end
 
     it "can find the distance between two stops on different lines" do
-      expect(@mbta.distance([:red, 'Alewife'],[:green, 'Boylston'])).to eq 3
+      expect(@mbta.distance([:red, 'Alewife'],[:green, 'Boylston'])).to eq 7
     end
 
     it "gives the correct distance when starts and ends at same stop" do
