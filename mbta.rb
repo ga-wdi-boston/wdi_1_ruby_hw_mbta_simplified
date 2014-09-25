@@ -38,53 +38,45 @@ mbta_lines = {
     "tufts medical center"]
   }
 
+
 puts "Hi there! I'd love to help you figure out how far your commute is."
 
 # getting user lines and stations
-def getting_stations (first_line, second_line)
-  puts "Which line will you begin on? (Red, Green, or Orange)"
-  first_line = gets.chomp.downcase
-    if first_line == "red"
-      return :red
-    elsif first_line == "green"
-      return :greem
-    elsif first_line == "orange"
-      return :orange
-    end
-  puts "Which station will you start at?"
-  first_station = gets.chomp.downcase
-  puts "Which line will you end on?"
-  second_line = gets.chomp.downcase
-    if second_line == "red"
-      return :red
-    elsif second_line == "green"
-      return :greem
-    elsif second_line == "orange"
-      return :orange
-    end
-  puts "Which station will you end at?"
-  second_station = gets.chomp.downcase
-end
+puts "Which line will you begin on? (Red, Green, or Orange)"
+first_line = gets.chomp.downcase
+puts "Which station will you start at?"
+first_station = gets.chomp.downcase
+puts "Which line will you end on?"
+second_line = gets.chomp.downcase
+puts "Which station will you end at?"
+second_station = gets.chomp.downcase
 
-def commute(line1, station1, line2, station2)
-  if line1 == line2
-    num_stops = mbta_lines[line1].index(station1) - mbta_lines[line1].index(station2)
+def no_transfer(mbta_lines, line, stop1, stop2)
+  if line == "red"
+    num_stops = mbta_lines[:red].index(stop1) - mbta_lines[:red].index(stop2)
     puts num_stops.abs
+  elsif line == "green"
+    num_stops = mbta_lines[:green].index(stop1) - mbta_lines[:green].index(stop2)
+    puts num_stops.abs
+  elsif line == "orange"
+    num_stops = mbta_lines[:orange].index(stop1) - mbta_lines[:orange].index(stop2)
+    puts num_stops.abs
+  end
+end
+
+def commute(mbta_lines, line1, station1, line2, station2)
+  if line1 == line2
+    no_transfer(mbta_lines, line, stop1, stop2)
+  else
+    stops_on_line1 = mbta_lines[line1.to_sym].index(station1) - mbta_lines[line1.to_sym].index("park street")
+    stops_on_line2 = mbta_lines[line2.to_sym].index(station2) - mbta_lines[line2.to_sym].index("park street")
+    puts stops_on_line1.abs + stops_on_line2.abs
+  end
 end
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+commute(first_line, first_station, second_line, second_station)
 
 
 
