@@ -6,13 +6,35 @@
 # Repository has several logical commits with descriptive messages
 # Code uses correct indentation/style and descriptive variable names
 
+require 'pry'
 
 
 trip = {
-  red: [["alewife", "davis", "porter", "harvard", "central", "kendall/mit"], ["park street"], ["south station"]]
-  green: [["haymarket", "government center"], ["park street"], ["boylston", "arlington", "copley"]]
-  orange: [["north station", "haymarket"], ["park street"], ["state street", "downtown crossing", "chinatown", "tufts medical center"]]
+  red: [  "alewife",
+          "davis",
+          "porter",
+          "harvard",
+          "central",
+          "kendall/mit",
+          "park street",
+          "south station"],
+
+  green: ["haymarket",
+          "government center",
+          "park street",
+          "boylston",
+          "arlington",
+          "copley"]
+
+  orange: ["north station",
+          "haymarket",
+          "park street",
+          "state street",
+          "downtown crossing",
+          "chinatown",
+          "tufts medical center"]
 }
+
 
 
 #prompts user for an 'origin' stop and a 'destination stop'
@@ -27,5 +49,21 @@ destination_line = gets.chomp.downcase.to_sym
 
 puts "What's your destination stop?"
 destination_stop = gets.chomp.downcase
+
+
+
+# takes index location of origin, subtracts intersection from it
+# takes index location of destination, subtracts intersection from it
+# takes index location
+
+before_intersection = trip[origin_line].index(origin_stop) - trip[origin_line].index("park street").abs
+
+after_intersection = trip[destination_line].index() trip[destination_line].index("park street")
+
+puts before_intersection + after_intersection
+
+binding.pry
+
+
 
 
