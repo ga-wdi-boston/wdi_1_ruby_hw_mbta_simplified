@@ -61,7 +61,7 @@ destination_stop = gets.chomp.downcase
 
 before_intersection = trip[origin_line].index(origin_stop) - trip[origin_line].index("park street").abs
 
-after_intersection = trip[destination_line].index(destination_stop) - trip[destination_line].index("park street")
+after_intersection = trip[destination_line].index(destination_stop) - trip[destination_line].index("park street").abs
 
 puts before_intersection + after_intersection
 
