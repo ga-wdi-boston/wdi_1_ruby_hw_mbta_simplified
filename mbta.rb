@@ -46,12 +46,12 @@ end
 
 # User interface
 def get_station_name
-  print "Please enter station: "
+  print " Please enter station: "
   gets.chomp
 end
 
 def get_station_line
-  print "Please enter line (red/green/orange): "
+  print " Please enter line (red/green/orange): "
   case gets.chomp
   when "red"
     return :red_line
@@ -61,11 +61,22 @@ def get_station_line
     return :green_line
   else
     puts "Sorry... invalid option."
+    exit(0)
   end
 end
 
 # run calculator
 def main (subway_map)
+  puts "Welcome to the MBTA distance calculator!"
+  puts "\nHere is a reference to all the stations:"
+  print " red line: "
+  puts subway_map[:red_line].join(", ")
+  print " green line: "
+  puts subway_map[:green_line].join(", ")
+  print " orange line: "
+  puts subway_map[:orange_line].join(", ")
+  puts "\n"
+
   puts "Let's start with your starting station."
   start_stop = get_station_name
   start_line = get_station_line
@@ -74,9 +85,9 @@ def main (subway_map)
   finish_line = get_station_line
 
   if start_line == finish_line
-    puts "#{start_stop} station is #{distance_same_line(start_stop, finish_stop, start_line, subway_map)} stops away from #{finish_stop} station."
+    puts "\n#{start_stop} station is #{distance_same_line(start_stop, finish_stop, start_line, subway_map)} stop(s) away from #{finish_stop} station.\n"
   else
-    puts "#{start_stop} station is #{distance_different_lines(start_stop, start_line, finish_stop, finish_line, subway_map)} stops away from #{finish_stop} station."
+    puts "\n#{start_stop} station is #{distance_different_lines(start_stop, start_line, finish_stop, finish_line, subway_map)} stop(s) away from #{finish_stop} station.\n"
   end
 end
 
