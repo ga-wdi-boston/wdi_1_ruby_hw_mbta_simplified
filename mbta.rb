@@ -49,20 +49,23 @@ Use methods to make your code better, with each method doing a single and small 
 
 =end
 
-# ---------------- BEGIN CODE ----------------
-
 require 'pry'
 
-# def travel_distance(origin_line, origin_stop, destination_line, destination_stop)
+# ---------------- DEFINING METHODS ----------------
 
-#   if origin_line == destination_line
+def travel_distance(origin_line, origin_stop, park_street_origin, destination_line, destination_stop, park_street_destination)
 
+  if origin_line == destination_line
+    num_stops = (origin_stop - destination_stop).abs
 
+  elsif origin_line != destination_line
+    # if had a class for mbta hash, possible to include look-up code for park_street_origin and park_street_destination inside this method?
+    num_stops_origin = ((origin_stop-park_street_origin).abs + (destination_stop-park_street_origin).abs)
 
-#   puts "You will be traveling #{travel_distance} stops in total." # where transfer is necessary, would also like to output number of stops to and from Park on each line, but not enough time.
+  end
 
-
-# end
+  puts "You will be traveling #{num_stops.to_s} stops in total." # where transfer is necessary, would also like to output number of stops to and from Park on each line, but not enough time.
+end
 
 
 def get_user_line(on_or_off)
@@ -75,18 +78,19 @@ def get_user_line(on_or_off)
   end
     gets.chomp.downcase
 
-  # ideally should include a test for input validity, but am saving time
+  # should include a test for input validity, but do other stuff first
 end
+
 
 def get_user_stop
     print "\nYour stop number is: "
-    gets.chomp.downcase
+    gets.chomp.to_i
 
-    # ideally should include a test for input validity, but am saving time
+    # should include a test for input validity, but do other stuff first
 end
 
+# ---------------- DATA COLLECTIONS ----------------
 
-# thinking maybe there's a way to take user's selection and modify/shift arrays so that user's stop becomes 0 in the indices
 mbta = {
   red: [
     "Alewife",
@@ -118,9 +122,7 @@ mbta = {
     "Tufts Medical Center"],
 }
 
-
-
-# FOUR USER INPUTS: origin_line, origin_stop, destination_line, destination_stop
+# ---------------- MAIN CODE ----------------
 
 puts "\nLet me tell you how many T stops you'll need to travel on your ride.\n"
 
@@ -128,7 +130,7 @@ binding.pry
 
 origin_line = get_user_line("origin")
 
-# would like to create a method to do this so can just call the method in the main code, but couldn't figure it out in time. Guessing hash itself has to be its own separate method or class somehow?
+# would like to create a method to do this so can just call the method in the main code, but taking too long to figure out. Guessing hash itself has to be its own separate method or class somehow?
 all_origin_stops = mbta[origin_line.to_sym].map do |stop|
   i = mbta[origin_line.to_sym].index(stop)
   "Type #{i} for #{stop}."
@@ -149,6 +151,12 @@ end
 puts all_destination_stops
 
 destination_stop = get_user_stop
+
+park_street_origin = mbta[origin_line.to_sym].index("Park Street")
+park_street_destination = mbta[destination_line.to_sym].index("Park Street")
+
+travel_distance(origin_line, origin_stop, park_street_origin, destination_line, destination_stop, park_street_destination)
+
 
 binding.pry
 
