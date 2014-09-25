@@ -53,10 +53,9 @@ Use methods to make your code better, with each method doing a single and small 
 
 require 'pry'
 
-# def list_stops(t_line_color)
-#   all_stops =
+def list_stops(t_line_color)
 
-# end
+end
 
 # thinking maybe there's a way to take user's selection and modify/shift arrays so that user's stop becomes 0 in the indices
 mbta = {
@@ -99,17 +98,21 @@ puts "Let me tell you how many stops you will be traveling on this trip. Please 
 puts "Color of the T line you are starting on: "
 origin_line = gets.chomp.downcase
 
-# binding.pry
+# ideally should include a test for input validity
 
+# binding.pry
+puts "\nThank you. Next, please identiy #{origin_line.capitalize} Line stop you are starting at.\n"
 all_stops = mbta[origin_line.to_sym].map do |stop|
   i = mbta[origin_line.to_sym].index(stop)
   "Type #{i} for #{stop}."
 end
 
 puts all_stops
+origin_stop = gets.chomp.to_i
 
+# ideally should include a test for input validity
 
-binding.pry
+# binding.pry
 
 
 puts "Full name of the stop you are starting at: "
