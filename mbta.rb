@@ -86,7 +86,12 @@ def travel_distance(origin_line, origin_stop, park_street_origin, destination_li
 
   end
 
-  puts "You will have to travel #{num_stops} stops in total!" # where transfer is necessary, would also like to output number of stops to and from Park on each line, but not enough time.
+  if num_stops == 1
+    puts "\nYou will have to travel #{num_stops} stop in total!"
+  else
+    puts "\nYou will have to travel #{num_stops} stops in total!" # where transfer is necessary, would also like to output number of stops to and from Park on each line, but not enough time.
+  end
+
 end
 
 # ---------------- DATA COLLECTIONS ----------------
@@ -160,5 +165,21 @@ travel_distance(origin_line, origin_stop, park_street_origin, destination_line, 
 
 # binding.pry
 
+=begin
 
+Ilya's try: this code doesn't work, but something like this where the program will determine the line based on the user's selected stop. "return" is the issue. and no "return" and just nil doesn't work either.
+
+def get_line(train_lines, station)
+  train_lines[:red].include?(station) ? return :red : nil
+  train_lines[:green].include?(station) ? return :green : nil
+  train_lines[:orange].include?(station) ? return :orange : nil
+end
+
+=end
+
+=begin
+
+can create a separate method for identifying transfer stop of Park Street by passing hash / array into the method.
+
+=end
 
