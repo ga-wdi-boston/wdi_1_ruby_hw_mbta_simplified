@@ -1,6 +1,10 @@
 class MBTA
 
   def stops
+    # The way I see it, since all lines intersect at Park Street,
+    # and no other stops are shared,
+    # the distance between any two stops
+    # is the sum of their distances to Park Street.
     {
       red: [
         'Alewife',
