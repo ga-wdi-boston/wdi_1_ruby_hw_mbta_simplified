@@ -93,37 +93,37 @@ mbta = {
 
 # FOUR USER INPUTS: origin_line, origin_stop, destination_line, destination_stop
 
-puts "Let me tell you how many stops you will be traveling on this trip. Please supply me with the following information."
+puts "\nLet me tell you how many stops you will be traveling on this trip.\n"
 
-print "What is the color of the T line you are STARTING on: "
+print "First, what is the color of the T line you are STARTING on: "
 origin_line = gets.chomp.downcase
 # ideally should include a test for input validity
 
-puts "\nThank you. Next, please identiy the specific #{origin_line.capitalize} Line stop you are getting ON at.\n"
+puts "\nNext, what specific #{origin_line.capitalize} Line stop you are getting ON at.\n"
 
-# would like to create a method to do this and then only need to call the method in the main code, but couldn't figure it out in the time I had. Main question is how to refer to mbta hash within the method -- guessing hash itself has to be incorporated in a separate method somehow?
+# would like to create a method to do this and then only need to call the method in the main code, but couldn't figure it out in the time I had. Main question is how to refer to mbta hash within the method -- guessing hash itself has to be its own separate method or class somehow?
 all_origin_stops = mbta[origin_line.to_sym].map do |stop|
   i = mbta[origin_line.to_sym].index(stop)
   "Type #{i} for #{stop}."
 end
 
 puts all_origin_stops
-print "What number is your stop? "
+print "\nYour stop number is: "
 origin_stop = gets.chomp.to_i
 # ideally should include a test for input validity
 
-print "What is the color of the T line you are ENDING on: "
+print "\nAlso, what is the color of the T line you are ENDING on: "
 destination_line = gets.chomp.downcase
 # ideally should include a test for input validity
 
-puts "\nThank you. Next, please identiy the specific #{destination_line.capitalize} Line stop you are getting OFF at.\n"
-all_destination_stops = mbta[origin_line.to_sym].map do |stop|
-  i = mbta[origin_line.to_sym].index(stop)
+puts "\nAnd finally, what specific #{destination_line.capitalize} Line stop you are getting OFF at.\n"
+all_destination_stops = mbta[destination_line.to_sym].map do |stop|
+  i = mbta[destination_line.to_sym].index(stop)
   "Type #{i} for #{stop}."
 end
 
 puts all_destination_stops
-print "What number is your stop? "
+print "\nYour stop number is: "
 destination_stop = gets.chomp.to_i
 
 binding.pry
