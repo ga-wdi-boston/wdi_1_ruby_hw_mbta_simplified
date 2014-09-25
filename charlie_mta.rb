@@ -6,11 +6,12 @@
 # Repository has several logical commits with descriptive messages
 # Code uses correct indentation/style and descriptive variable names
 
-require 'pry'
+# require 'pry'
 
 
-trip = {
-  red: [
+
+  trip = {
+    red: [
         "alewife",
          "davis",
          "porter",
@@ -21,7 +22,7 @@ trip = {
          "south station"
          ],
 
-  green: [
+    green: [
           "haymarket",
           "government center",
           "park street",
@@ -30,19 +31,24 @@ trip = {
           "copley"
           ],
 
-  orange: [
-          "north station","haymarket", "park street", "state street",
+    orange: [
+          "north station",
+          "haymarket",
+          "park street",
+          "state street",
           "downtown crossing",
           "chinatown",
           "tufts medical center"
           ]
-}
+  }
+
 
 
 
 #prompts user for an 'origin' stop and a 'destination stop'
 puts "What's the color of your origin line?"
-origin_line = gets.chomp.downcase.to_sym
+gets.chomp.downcase.to_sym
+
 
 puts "What's your origin stop?"
 origin_stop = gets.chomp.downcase
@@ -57,15 +63,20 @@ destination_stop = gets.chomp.downcase
 
 # takes index location of origin, subtracts intersection from it
 # takes index location of destination, subtracts intersection from it
-# takes index location
+# adds them together and outputs to console
 
-before_intersection = trip[origin_line].index(origin_stop) - trip[origin_line].index("park street").abs
+before_intersection = (trip[origin_line].index(origin_stop) - trip[origin_line].index("park street")).abs
 
-after_intersection = trip[destination_line].index(destination_stop) - trip[destination_line].index("park street").abs
+after_intersection = (trip[destination_line].index(destination_stop) - trip[destination_line].index("park street")).abs
 
-puts before_intersection + after_intersection
+puts "You will have #{before_intersection + after_intersection} stops."
 
-binding.pry
+
+
+
+# def output(before_intersection, after_intersection)
+
+# binding.pry
 
 
 
