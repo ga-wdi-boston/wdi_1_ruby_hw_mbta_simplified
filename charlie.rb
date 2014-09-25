@@ -6,8 +6,54 @@
 # # Repository has several logical commits with descriptive messages
 # # Code uses correct indentation/style and descriptive variable names
 
-# Given this subway system, write a Ruby program that prompts the user for an "origin" stop and a "destination" stop, and tells them the number of stops they would have to make on that journey. For instance, traveling from Central to Copley would be 5 stops.
 
-# Hint: Prompt the user for four separate pieces of data: origin line, origin stop, destination line, and destination stop.
+require 'pry'
 
 
+#prompt user for origin and destination info
+
+puts "What's your origin stop?"
+origin_stop = gets.chomp
+
+puts "On which line?"
+origin_line = gets.chomp
+
+puts "What's your destination stop?"
+destination_stop = gets.chomp
+
+puts "On which line?"
+destination_line = gets.chomp
+
+puts "Your Journey:"
+puts "Traveling from #{origin_stop} on the #{origin_line} will take #{stops} stops to get to #{destination_stop} on the #{destination_line}"
+
+
+t_lines = {
+          red_line: [
+            "Alewife",
+            "Davis",
+            "Porter",
+            "Harvard",
+            "Central",
+            "Kendall/MIT",
+            "Park Street",
+            "South Station"
+            ],
+          green_line: [
+            "Haymarket",
+            "Government Center",
+            "Park Street",
+            "Boylston",
+            "Arlington",
+            "Copley"
+            ],
+          orange_line: [
+            "North Station",
+            "Haymarket",
+            "Park Street",
+            "State Street",
+            "Downtown Crossing",
+            "Chinatown",
+            "Tufts Medical Center"
+            ]
+        }
