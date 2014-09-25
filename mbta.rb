@@ -32,9 +32,12 @@ class MBTA
         'Downtown Crossing',
         'Chinatown',
         'Tufts Medical Center'
-      ],
-      common: 'Park Street'
+      ]
     }
+  end
+
+  def common_stop
+    'Park Street'
   end
 
   def distance(stop1, stop2)
@@ -52,8 +55,8 @@ class MBTA
       return (position_b - position_a).abs
     else
       # recursion ahoy!
-      distance_a = distance([origin_line, origin_stop], [origin_line, self.stops[:common]])
-      distance_b = distance([destination_line, destination_stop], [destination_line, self.stops[:common]])
+      distance_a = distance([origin_line, origin_stop], [origin_line, self.common_stop])
+      distance_b = distance([destination_line, destination_stop], [destination_line, self.common_stop])
       return distance_a + distance_b
     end
 
