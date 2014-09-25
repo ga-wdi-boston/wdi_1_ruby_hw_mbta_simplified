@@ -95,33 +95,38 @@ mbta = {
 
 puts "Let me tell you how many stops you will be traveling on this trip. Please supply me with the following information."
 
-puts "Color of the T line you are starting on: "
+print "What is the color of the T line you are STARTING on: "
 origin_line = gets.chomp.downcase
-
 # ideally should include a test for input validity
 
-# binding.pry
-puts "\nThank you. Next, please identiy #{origin_line.capitalize} Line stop you are starting at.\n"
-all_stops = mbta[origin_line.to_sym].map do |stop|
+puts "\nThank you. Next, please identiy the specific #{origin_line.capitalize} Line stop you are getting ON at.\n"
+
+# would like to create a method to do this and then only need to call the method in the main code, but couldn't figure it out in the time I had. Main question is how to refer to mbta hash within the method -- guessing hash itself has to be incorporated in a separate method somehow?
+all_origin_stops = mbta[origin_line.to_sym].map do |stop|
   i = mbta[origin_line.to_sym].index(stop)
   "Type #{i} for #{stop}."
 end
 
-puts all_stops
+puts all_origin_stops
+print "What number is your stop? "
 origin_stop = gets.chomp.to_i
-
 # ideally should include a test for input validity
 
-# binding.pry
-
-
-puts "Full name of the stop you are starting at: "
-origin_stop = gets.chomp.downcase
-
-puts "Color of the T line you are getting off of:"
+print "What is the color of the T line you are ENDING on: "
 destination_line = gets.chomp.downcase
+# ideally should include a test for input validity
 
-puts "Full name of the stop you are getting off at: "
-destination_stop = gets.chomp.downcase
+puts "\nThank you. Next, please identiy the specific #{destination_line.capitalize} Line stop you are getting OFF at.\n"
+all_destination_stops = mbta[origin_line.to_sym].map do |stop|
+  i = mbta[origin_line.to_sym].index(stop)
+  "Type #{i} for #{stop}."
+end
+
+puts all_destination_stops
+print "What number is your stop? "
+destination_stop = gets.chomp.to_i
+
+binding.pry
+
 
 
