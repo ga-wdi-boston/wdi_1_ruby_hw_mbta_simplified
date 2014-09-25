@@ -53,16 +53,41 @@ Use methods to make your code better, with each method doing a single and small 
 
 require 'pry'
 
-def list_stops(t_line_color)
-  all_stops =
+# def list_stops(t_line_color)
+#   all_stops =
 
-end
+# end
 
 # thinking maybe there's a way to take user's selection and modify/shift arrays so that user's stop becomes 0 in the indices
 mbta = {
-  red: ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"]
-  green: ["Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"]
-  orange: ["North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"]
+  red: [
+    "Alewife",
+    "Davis",
+    "Porter",
+    "Harvard",
+    "Central",
+    "Kendall/MIT",
+    "Park Street",
+    "South Station"
+  ],
+
+  green: [
+    "Haymarket",
+    "Government Center",
+    "Park Street",
+    "Boylston",
+    "Arlington",
+    "Copley"
+  ],
+
+  orange: [
+    "North Station",
+    "Haymarket",
+    "Park Street",
+    "State Street",
+    "Downtown Crossing",
+    "Chinatown",
+    "Tufts Medical Center"],
 }
 
 
@@ -72,11 +97,20 @@ mbta = {
 puts "Let me tell you how many stops you will be traveling on this trip. Please supply me with the following information."
 
 puts "Color of the T line you are starting on: "
-origin_line = gets.chomp.downcase.to_sym
+origin_line = gets.chomp.downcase
+
+# binding.pry
+
+all_stops = mbta[origin_line.to_sym].map do |stop|
+  i = mbta[origin_line.to_sym].index(stop)
+  "Type #{i} for #{stop}."
+end
+
+puts all_stops
+
 
 binding.pry
 
-all_stops = mbta[]
 
 puts "Full name of the stop you are starting at: "
 origin_stop = gets.chomp.downcase
