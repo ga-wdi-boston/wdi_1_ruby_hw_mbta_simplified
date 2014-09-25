@@ -2,8 +2,6 @@
 # # Program can find the distance between two stops on different lines
 # # Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street)
 # # Stops and lines can be added, removed, or rearranged in your code without making any changes to the route-finding logic (within reason – every line must intersect at a single common stop)
-# # Repository has several logical commits with descriptive messages
-# # Code uses correct indentation/style and descriptive variable names
 
 
 require 'pry'
@@ -38,11 +36,11 @@ t_lines = {
             ]
         }
 
-#prompt user for origin and destination info
+# prompt user for origin and destination info
 puts "I'll tell you how to go where you want to go on the MBTA!"
 
 puts "On which line will you originate? \n -Red \n -Orange \n -Green"
-origin_line = gets.chomp.capitalize.to_sym
+origin_line = gets.chomp.capitalize
 # if origin_line != (:Red || :Orange || :Green)
 #   puts "Please choose Red, Orange, or Green"
 #   quit(0)
@@ -52,7 +50,7 @@ puts "What's your origin stop?"
 origin_stop = gets.chomp.capitalize
 
 puts "On which line is your destination? \n -Red \n -Orange \n -Green"
-destination_line = gets.chomp.capitalize.to_sym
+destination_line = gets.chomp.capitalize
 # if destination_line != (:Red || :Orange || :Green)
 #   puts "Please choose Red, Orange, or Green"
 #   quit(0)
@@ -61,17 +59,18 @@ destination_line = gets.chomp.capitalize.to_sym
 puts "What's your destination stop?"
 destination_stop = gets.chomp.capitalize
 
-# t_lines[origin_line].index(origin_stop)
-# if origin_line == destination_line
-    stops = (t_lines[destination_line.to_sym].index(destination_stop) - t_lines[origin_line.to_sym].index(origin_stop)).abs
-    puts stops
 
-  # puts t_lines[destination_line].index(destination_stop)
-# else
-# end
+# if origin and destintation lines are the same, we only care about finding the difference between the indexes within the array
+ if origin_line == destination_line
+    destin_stops = t_lines[destination_line.to_sym].index(destination_stop)
+    origin_stops =  t_lines[origin_line.to_sym].index(origin_stop)
+    puts (destin_stops - origin_stops).abs
+  else
+# if origin and destination lines are not the same, we have to calculate number_of_stops in relation to park street
+  number_of_stops = (t_lines[destination_line.to_sym].index(destination_stop) - t_lines[origin_line.to_sym].index("Park Street")).abs
+    end
 
-#result displayed to user
+
+# result displayed to user
 puts "Your Journey:"
 puts "Traveling from #{origin_stop} on the #{origin_line} will take #{number_of_stops} stops to get to #{destination_stop} on the #{destination_line}"
-
-
