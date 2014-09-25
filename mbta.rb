@@ -53,6 +53,11 @@ Use methods to make your code better, with each method doing a single and small 
 
 require 'pry'
 
+def list_stops(t_line_color)
+  all_stops =
+
+end
+
 # thinking maybe there's a way to take user's selection and modify/shift arrays so that user's stop becomes 0 in the indices
 mbta = {
   red: ["Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"]
@@ -67,7 +72,11 @@ mbta = {
 puts "Let me tell you how many stops you will be traveling on this trip. Please supply me with the following information."
 
 puts "Color of the T line you are starting on: "
-origin_line = gets.chomp.downcase
+origin_line = gets.chomp.downcase.to_sym
+
+binding.pry
+
+all_stops = mbta[]
 
 puts "Full name of the stop you are starting at: "
 origin_stop = gets.chomp.downcase
