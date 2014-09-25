@@ -45,37 +45,18 @@ end
 # puts distance_different_lines("Park Street", :green_line, "Davis", :red_line, subway_map) # Edge case test 2: starts on Park Street
 
 # User interface
-def get_start_name
-  print "Please enter start stop: "
+def get_station_name
+  print "Please enter station: "
   gets.chomp
 end
 
-def get_start_line
-  print "Please enter start line (red/green/blue): "
+def get_station_line
+  print "Please enter line (red/green/orange): "
   case gets.chomp
   when "red"
     return :red_line
-  when "blue"
-    return :blue_line
-  when "green"
-    return :green_line
-  else
-    puts "Sorry... invalid option."
-  end
-end
-
-def get_finish_name
-  print "Please enter start stop: "
-  gets.chomp
-end
-
-def get_finish_line
-  print "Please enter start line (red/green/blue): "
-  case gets.chomp
-  when "red"
-    return :red_line
-  when "blue"
-    return :blue_line
+  when "orange"
+    return :orange_line
   when "green"
     return :green_line
   else
@@ -85,10 +66,12 @@ end
 
 # run calculator
 def main (subway_map)
-  start_stop = get_start_name
-  start_line = get_start_line
-  finish_stop = get_finish_name
-  finish_line = get_finish_line
+  puts "Let's start with your starting station."
+  start_stop = get_station_name
+  start_line = get_station_line
+  puts "Now let's get your destination."
+  finish_stop = get_station_name
+  finish_line = get_station_line
 
   if start_line == finish_line
     puts "#{start_stop} station is #{distance_same_line(start_stop, finish_stop, start_line, subway_map)} stops away from #{finish_stop} station."
