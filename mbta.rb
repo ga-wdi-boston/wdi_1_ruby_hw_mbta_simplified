@@ -32,34 +32,43 @@ mbta_lines = {
     "tufts medical center"]
   }
 
-
 puts "Hi there! I'd love to help you figure out how far your commute is."
 
+# def getting_stations (first_line, second_line)
 puts "Which line will you begin on? (Red, Green, or Orange)"
 first_line = gets.chomp.downcase
+  if first_line == "red"
+    return :red
+  elsif first_line == "green"
+    return :greem
+  elsif first_line == "orange"
+    return :orange
+  end
+
 puts "Which station will you start at?"
 first_station = gets.chomp.downcase
+
 puts "Which line will you end on?"
 second_line = gets.chomp.downcase
+  if second_line == "red"
+      return :red
+    elsif second_line == "green"
+      return :greem
+    elsif second_line == "orange"
+      return :orange
+    end
+
 puts "Which station will you end at?"
 second_station = gets.chomp.downcase
+# end
 
 
-#def commute(first_line, first_station, second_line, second_station)
-  # setting index numbers for each station to navigate in array
-  # if first_line == "red"
-  #   first_line = 0
-  # elsif first_line == "green"
-  #   first_line = 1
-  # elsif first_line == "orange"
-  #   first_line = 2
-  # elsif second_line == "red"
-  #   second_line = 0
-  # elsif second_line == "green"
-  #   second_line = 1
-  # elsif second_line == "orange"
-  #   second_line = 2
-  # end
+def commute(first_line, first_station, second_line, second_station)
+ if first_line == second_line
+  puts
+
+end
+
 
 puts mbta_lines[0][red]["davis"]
 
