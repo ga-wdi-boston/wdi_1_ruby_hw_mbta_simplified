@@ -13,6 +13,7 @@ require 'pry'
 
 # Database containing the lines and their requisite stops
 mbta_lines = {
+  IntersectingStation: "Park Street",
   Red: [
     "Alewife",
     "Davis",
@@ -42,7 +43,7 @@ mbta_lines = {
 puts "Welcome to the MBTA station distance calculator."
 
 puts "Is this a one or a two line itinery"
-num_lines = gets.chomp
+num_lines = gets.chomp.to_i
 
 # Origin Line
 puts "Please enter the line you want to start at (Red, Green, Orange)"
@@ -69,13 +70,33 @@ def get_line_stops(lines, origin_line)
   lines[origin_line.to_sym]
 end
 
-origin_station_stops = get_line_stops(mbta_lines, origin_line)
-if num_lines == 2
-  destination_station_stops = get_line_stops(mbta_lines, destination_line)
+# Calculate stops between origin and destination
+def calculate_distance(line_stops, origin_station, destination_station)
+  orig_stop = line_stops.index(origin_station)
+  dest_stop = line_stops.index(destination_station)
+  dist = (orig_stop - dest_stop).abs
 end
 
-# def calculate_distance(origin_line, orign_station, destination_line, destination_line = origin_line)
-# end
+
+# Main part of the program
+origin_station_stops = get_line_stops(mbta_lines, origin_line)
+if num_lines == 1
+  distance = calculate_distance(origin_station_stops, origin_station, destination_station)
+else
+  destination_station_stops = get_line_stops(mbta_lines, destination_line)
+  origin_distance = calculate_distance(origin_station_stops, origin_station, mbta_lines[:IntersectingStation])
+  destination_distance = calculate_distance(destination_station_stops, mbta_lines[:IntersectingStation], destination_station)
+  distance = origin_distance + destination_distance
+end
+
+if num_lines == 1
+  puts "It is #{distance} stops on the #{origin_line + ' Line'} from #{origin_station} to #{destination_station}"
+else
+  puts "It is #{distance} stops from #{origin_station} on the #{origin_line + ' Line'} to #{destination_station} on the #{destination_line + ' Line'}"
+end
+
+
+
 
 
 
