@@ -8,6 +8,11 @@ def choose_line
   puts mbta.stops.keys
   print "> "
   line = gets.chomp.downcase
+  while not mbta.stops.keys.include?(line)
+    puts "Sorry, that's not a line. Please type it as shown."
+    line = gets.chomp.downcase
+  end
+  line
 end
 
 def choose_stop(line)
@@ -16,6 +21,10 @@ def choose_stop(line)
   puts mbta.stops[line.to_sym]
   print "> "
   stop = gets.chomp.capitalize
+  while not mbta.stops[line.to_sym].include?(stop)
+    puts "Sorry, that's not a stop. Please type it as shown."
+    stop = gets.chomp.downcase
+  end
   [line.to_sym, stop]
 end
 
