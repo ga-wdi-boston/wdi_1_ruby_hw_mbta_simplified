@@ -1,11 +1,13 @@
+# orangeline, tufts medical center, Green Line, Copley #=> Get on the orangeline line at Tufts Medical Center, ride it for 2 stops and get off at Park Street, change to the greenline line, and ride it for 3 stops towards Copley. You will have arrived at your destination.
+
 require 'pry'
 
 class TeeRouter
 
   @@routes = {
-    redline: ["Alewife","Davis","Porter","Harvard","Central","Kendall/MIT","Charles/MGH","Park Street","South Station"],
-    greenline: ["Haymarket","Government Center","Park Street","Boylston","Arlington","Copley"],
-    orangeline: ["North Station","Haymarket","Park Street","State Street","Downtown Crossing","China Town","Tufts Medical Center"]
+    redline: ["Alewife","Davis","Porter","Harvard","Central","Kendall/MIT","Charles/MGH","Park Street","South Station", "Broadway", "Andrew", "JFK/UMASS", "Savin Hill"],
+    greenline: ["North Station","Haymarket","Government Center","Park Street","Boylston","Arlington","Copley"],
+    orangeline: ["North Station","Haymarket","State","Downtown Crossing","Park Street","China Town","Tufts Medical Center"]
   }
 
   def initialize(string)
@@ -30,26 +32,31 @@ class TeeRouter
     origin.sub!(/[\/]+[A-Za-z]+/){ $&.upcase }
     destination.sub!(/[\/]+[A-Za-z]+/){ $&.upcase }
 
-    route(@@routes[origin_line.to_sym], origin,@@routes[destination_line.to_sym], destination, array)
+    route(@@routes[origin_line.to_sym], origin_line, origin,@@routes[destination_line.to_sym], destination_line, destination,)
+
   end
 
-  def route(line1, origin, line2, destination, input)
-
-    #---------------------------
-    binding.pry #breakpoint
-    #---------------------------
-
-    if line1 == line2
-      result = "Get on the #{input[0]} line, ride it for #{line2.index(destination)-line1.index(origin)} stops, and get off at #{input[-1]}"
-    elsif origin == destination
+  def route(line1,line1name,origin,line2,line2name,destination)
+    if origin == destination
       result = "You want to get on and off at the same location? Doesn't sound like much of a trip to me..."
+      directions(result)
+    elsif line1 == line2
+      result = "Get on the #{line1name} line, ride it for #{line2.index(destination)-line1.index(origin)} stops, and get off at #{line2name}"
+      directions(result)
+    elsif line1 != line2
+      # TODO: Add an inbound/outbound flag to the route
+      line1.index(origin) > line1.index("Park Street") ? line1_stops_to_get_off = line1[line1.index("Park Street")..line1.index(origin)].length - 1 : line1_stops_to_get_off = line1[line1.index(origin)..line1.index("Park Street")].length - 1
+      line2.index(destination) > line2.index("Park Street") ? line2_stops_to_get_off = line2[line2.index("Park Street")..line2.index(destination)].length - 1 : line2_stops_to_get_off = line2[line2.index(destination)..line2.index("Park Street")].length - 1
+      result = "Get on the #{line1name} line at #{origin}, ride it for #{line1_stops_to_get_off} stops and get off at Park Street, change to the #{line2name} line, and ride it for #{line2_stops_to_get_off} stops towards #{destination}. You will have arrived at your destination."
+      directions(result)
+    else
+      result = "Something else happened"
     end
 
-    #---------------------------
-    binding.pry #breakpoint
-    #---------------------------
+  end
 
-
+  def directions(result)
+    print result
   end
 
 end
@@ -57,17 +64,15 @@ end
 puts "Enter: departure line, departure station, arrival line, arrival station (comma separated values)"
 TeeRouter.new(gets.chomp)
 
-# redline, harvard, Red line, kendall/mit
-
 =begin
 Specifications
 ————————————————————————————————————————————————————————————————————
 * Program has the subway system defined with appropriate data structures ##Done
 * Program can find the distance between two stops on the same line ##Done
-* Program can find the distance between two stops on different lines
-* Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street)
-* Stops and lines can be added, removed, or rearranged in your code without making any changes to the route-finding logic (within reason – every line must intersect at a single common stop)
-* Repository has several logical commits with descriptive messages
-* Code uses correct indentation/style and descriptive variable names
+* Program can find the distance between two stops on different lines ## Done
+* Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street) ## Done
+* Stops and lines can be added, removed, or rearranged in your code without making any changes to the route-finding logic (within reason – every line must intersect at a single common stop) ##Done
+* Repository has several logical commits with descriptive messages ##Done
+* Code uses correct indentation/style and descriptive variable names ## Done
 
 =end
