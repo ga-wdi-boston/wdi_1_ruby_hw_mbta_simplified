@@ -1,14 +1,27 @@
 require 'pry' #initialize pry
 # First I will work on the prompt
 
+lines = {
+
+    intersecting_station: ["Park Street"],
+
+    red_line: ["Alewife","Davis","Porter","Harvard","Central","Kendall/MIT", "Park Street", "South Station"],
+
+    green_line: ["Haymarket","Government Center","Park Street","Boylston","Arlington", "Copley"],
+
+    orange_line: ["North Station","Haymarket","Park","State Street","Downtown Crossing","Chinatown","Tufts Medical Center"]
+
+    }
+
 #prompt
 #origin line
+
 def original_line
 puts "What line are you starting from?"
- origin_line = gets.chomp.to_s.split.map(&:capitalize).join(' ')
- return origin_line
+gets.chomp.to_s.split.map(&:capitalize).join(' ')
 end
-
+original_line
+binding .pry
 def original_station
 puts "What station are you starting from?"
   origin_station = gets.chomp.to_s.split.map(&:capitalize).join(' ')
@@ -32,15 +45,7 @@ destination_line = destined_line
 
 #Hash for lines
 
-lines = {
 
-    red_line: ["Alewife","Davis","Porter","Harvard","Central","Kendall/MIT", "Park Street", "South Station"],
-
-    green_line: ["Haymarket","Government Center","Park Street","Boylston","Arlington", "Copley"],
-
-    orange_line: ["North Station","Haymarket","Park","State Street","Downtown Crossing","Chinatown","Tufts Medical Center"]
-
-    }
 
 red_line_arr = lines[:red_line] #the hash address of the red_line array
 green_line_arr = lines[:green_line]
