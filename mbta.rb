@@ -36,36 +36,32 @@ class MBTA
     'Park Street'
   end
 
-  def trip(origin_line, origin_stop, destination_line, destination_stop)
+  # def trip(origin_line, origin_stop, destination_line, destination_stop)
+  def trip(selections)
+    # takes an array
+    # this assumes the selections are in a certain order which,
+    # uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     {
       origin: {
-        line: origin_line,
-        stop: origin_stop
+        line: selections[0],
+        stop: selections[1]
       },
       destination: {
-        line: destination_line,
-        stop: destination_stop
+        line: selections[2],
+        stop: selections[3]
       }
     }
   end
-
-  # what if trip WASN'T a hash?
 
   def position(line, stop)
     self.stops[line].index(stop)
   end
 
   def trip_positions(trip)
-    # origin = self.position(trip[:origin][:line], trip[:origin][:stop])
-    # destination = self.position(trip[:destination][:line], trip[:destination][:stop])
-    # [origin, destination]
-
-    # instead, do something like
     positions = [trip[:origin], trip[:destination]].map do |point|
       self.position(point[:line], point[:stop])
     end
     positions
-
   end
 
   def distance(trip)
@@ -75,8 +71,13 @@ class MBTA
     # first, you get the origin line, the origin stop,
     # the destination line, and the destination stop
 
-    origin_line, origin_stop = trip[:origin].values
-    destination_line, destination_stop = trip[:destination].values
+    selections = [trip[:origin], trip[:destination]].map do |location|
+      location.values
+    end
+
+    selections.flatten!
+
+    origin_line, origin_stop, destination_line, destination_stop = selections
 
     # i'd like something like this:
 
@@ -86,14 +87,17 @@ class MBTA
     if origin_line == destination_line
       return (position_b - position_a).abs
     else
-      origin_trip = self.trip(origin_line,
+      origin_trip = self.trip([origin_line,
         origin_stop,
         origin_line,
-        self.common_stop)
-      destination_trip = self.trip(destination_line,
+        self.common_stop])
+      # origin_trip = self.trip(selections)
+      destination_trip = self.trip([destination_line,
         self.common_stop,
         destination_line,
-        destination_stop)
+        destination_stop])
+      # origin_trip = self.trip(selections)
+
 
       distance_a = distance(origin_trip)
       distance_b = distance(destination_trip)
