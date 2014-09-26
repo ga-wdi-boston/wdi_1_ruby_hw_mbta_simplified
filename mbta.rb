@@ -86,12 +86,6 @@ class MBTA
 
     # why is this so fucking huge?
 
-    selections = [trip[:origin], trip[:destination]].map do |location|
-      location.values
-    end
-
-    selections.flatten!
-
     position_a, position_b = self.trip_positions(trip)
 
     if trip[:origin][:line] == trip[:destination][:line]
