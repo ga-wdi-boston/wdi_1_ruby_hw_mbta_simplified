@@ -49,31 +49,24 @@ class MBTA
     }
   end
 
+  def position(line, stop)
+    self.stops[line].index(stop)
+  end
+
   def distance(trip)
-
-    # The way I see it, since all lines intersect at Park Street,
-    # and no other stops are shared,
-    # the distance between any two stops
-    # is the sum of their distances to Park Street.
-
     origin_line = trip[:origin][:line]
     origin_stop = trip[:origin][:stop]
     destination_line = trip[:destination][:line]
     destination_stop = trip[:destination][:stop]
 
-    # the distance between a and b is (position b - position a)
-
-    position_a = self.stops[origin_line].index(origin_stop)
-    position_b = self.stops[destination_line].index(destination_stop)
+    position_a = self.position(origin_line, origin_stop)
+    position_b = self.position(destination_line, destination_stop)
 
     if origin_line == destination_line
       return (position_b - position_a).abs
     else
-
       origin_trip = self.trip(origin_line, origin_stop, origin_line, self.common_stop)
       destination_trip = self.trip(destination_line, self.common_stop, destination_line, destination_stop)
-
-      # recursion ahoy!
 
       distance_a = distance(origin_trip)
       distance_b = distance(destination_trip)
