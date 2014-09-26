@@ -64,12 +64,27 @@ class MBTA
     positions
   end
 
+  def origin_to_trip(origin)
+    self.trip([
+      origin[:line],
+      origin[:stop],
+      origin[:line],
+      self.common_stop
+      ])
+  end
+
+  def destination_to_trip(destination)
+    self.trip([
+      destination[:line],
+      self.common_stop,
+      destination[:line],
+      destination[:stop]
+      ])
+  end
+
   def distance(trip)
 
     # why is this so fucking huge?
-
-    # first, you get the origin line, the origin stop,
-    # the destination line, and the destination stop
 
     selections = [trip[:origin], trip[:destination]].map do |location|
       location.values
@@ -77,33 +92,23 @@ class MBTA
 
     selections.flatten!
 
-    origin_line, origin_stop, destination_line, destination_stop = selections
-
-    # i'd like something like this:
-
     position_a, position_b = self.trip_positions(trip)
 
-    # v--- this is the only code that actually concerns distance
-    if origin_line == destination_line
+    if trip[:origin][:line] == trip[:destination][:line]
       return (position_b - position_a).abs
     else
-      origin_trip = self.trip([origin_line,
-        origin_stop,
-        origin_line,
-        self.common_stop])
-      # origin_trip = self.trip(selections)
-      destination_trip = self.trip([destination_line,
-        self.common_stop,
-        destination_line,
-        destination_stop])
-      # origin_trip = self.trip(selections)
+      origin_trip = origin_to_trip(trip[:origin])
+      destination_trip = destination_to_trip(trip[:destination])
 
+      distance_a, distance_b = [
+        origin_trip,
+        destination_trip
+        ].map do |trip|
+        distance(trip)
+      end
 
-      distance_a = distance(origin_trip)
-      distance_b = distance(destination_trip)
       return distance_a + distance_b
     end
-    # ^---
 
   end
 
