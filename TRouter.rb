@@ -27,7 +27,7 @@ class TeeRouter
   end
 
   def parse_array(array)
-    # TODO: make this parsing more eleganter. Measuring for 4 isn't the best way to check for goodness of the input
+    # TODO: make this parsing more eleganter. Measuring for 2 isn't the best way to check for goodness of the input
     good = array.length == 2 ? get_stations(array) :  directions("Invalid arrival and destination.")
   end
 
@@ -42,13 +42,12 @@ class TeeRouter
   end
 
   def set_routes(origin, destination)
+    # i need these to be array, because a station could be on more than one line
     origin_line = get_route_line(origin)
     destination_line = get_route_line(destination)
 
-    # i need these to be array, because a station could be on more than one line
     origin_line ? origin_line_name = get_route_name(origin_line) : "no origin line"
     destination_line ? destination_line_name = get_route_name(destination_line) : "no destination line"
-
     route(origin, origin_line_name, origin_line, destination, destination_line_name, destination_line)
   end
 
@@ -57,7 +56,9 @@ class TeeRouter
   end
 
   def get_route_line(station)
-    line = [] #=> need to check for more than one connection; arrays in array? or new hash?
+    #=> need to check for more than one connection; arrays in array? or new hash?
+    # the problem is that a destination line like South Station returns the last value => Silver Line; not optimal
+    line = []
     @@routes.each_pair { |key,value| value.include?(station) ? line = value.map{ |value| value } : false }
     return line
   end
