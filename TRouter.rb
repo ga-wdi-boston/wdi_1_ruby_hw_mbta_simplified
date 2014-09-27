@@ -22,6 +22,20 @@ class TeeRouter
     }
   }
 
+  # park street, downtown crossing, and south station connect the redline
+  # state and government center connect the blue line
+
+  # collect the unique stations in a new hash
+  # for each key,value pair, match the stations that connect the same lines
+
+  # out of this group, if there are any other values in the array that match any of the other keys, then we have a connecting station
+
+  # park_street: [:redline,:greenlineB,:greenlineC,:greenlineD,:greenlineE],
+  # downtown_crossing: [:redline,:orangeline],
+  # south_station: [:redline, :silverline],
+  # state: [:orangeline, :blueline],
+  # government_center: [:greenlineC, :greenlineE, :blueline]
+
   def initialize(string)
     parse_array(string.scan(/\b[\w\s\/]+/im)) # => ["...", "..."]
   end
@@ -42,60 +56,86 @@ class TeeRouter
   end
 
   def set_routes(origin, destination)
-    # i need these to be array, because a station could be on more than one line
-    origin_line = get_route_line(origin)
-    destination_line = get_route_line(destination)
-
-    origin_line ? origin_line_name = get_route_name(origin_line) : "no origin line"
-    destination_line ? destination_line_name = get_route_name(destination_line) : "no destination line"
-    route(origin, origin_line_name, origin_line, destination, destination_line_name, destination_line)
+    # ——————————————————————————————————————————————————
+    # First we pass the origins lines into a hash, because the origin might have multiple connecting lines
+    # Second we pass in the destinations lines into a hash, because the destination might have multiple connecting lines
+    # Then we see if both hashes have matching keys, meaning they're on the same line.
+    # If they don't have matching keys, that means they're on different lines, and we need to find the connecting station
+    # ——————————————————————————————————————————————————
+    origin_lines = get_route_line(origin)
+    destination_lines = get_route_line(destination)
+    single_line = {}
+    origin_lines.each_pair { |key, value| destination_lines.has_key?(key) ? single_line.store(key,value) : nil }
+    single_line.empty? ? get_connections(origin, destination, origin_lines, destination_lines) : set_single_line(origin, destination, single_line)
   end
 
+  def get_connections(origin, destination, origin_lines, destination_lines)
+
+    # ——————————————————————————————————————————————————
+    # This method gets run when there's no single line we can ride and we have to change lines.
+    # First, we declare the arrays we'll have to work with.
+    # Second, we look at each key/value pair in the connections, and stringify them for matching against our line array values
+    # Then, we look at each key/value pair in the origin_lines, and for each pair, we loop through the connections and see if there are any matches between the origin's lines and the connecting stations.
+    # Essentially what this does is find the connecting station(s) on the origin's lines
+    # We then look for connecting stations in the destination lines.
+    # Once we have the connecting stations, we match them and put the matches into a single array. If this array has a length > 0, that means we can connect at a single station: (take line_a, get off at connecting station, take line_b to destination).
+    # If matched_connections has a length that == 0, that means there are no stations that connect, and we have to find the connecting line.
+    # It's quite possible that matched_connections will have more than 1 element in the array. for instance, harvard to north station has 2 matching connections (redline to greenline,  redline to orangeline)
+    # we probably want to find the connection with the least amount of stops. if all the connections have the same amount of stops, we need to know that too.
+    # It's also possible that an indirect connection (changing lines twice) is more efficient than changing trains once (ie Copley to Ruggles is more efficient by Greenline to Redline to Orangeline)
+    # ——————————————————————————————————————————————————
+    origin_connections = []
+    dest_connections = []
+    connections_to_strings = []
+
+    @@routes[:connections].each_pair { |key, value| key.to_s =~ /[_]/ ? connections_to_strings << key.to_s.gsub!(/[_]/, " ").split.map(&:capitalize)*' ' : connections_to_strings << key.to_s.capitalize  }
+    origin_lines.each_pair { |key, value| connections_to_strings.each { |connection| value.include?(connection) ? origin_connections << connection : nil } }
+    destination_lines.each_pair { |key, value| connections_to_strings.each { |connection| value.include?(connection) ? dest_connections << connection : nil } }
+    unique_origin_connections = origin_connections.uniq
+    unique_destination_connections = dest_connections.uniq
+
+    matched_connections = unique_origin_connections & unique_destination_connections
+
+    # to match a connecting train line between our origin and destination (changing trains twice)
+    # 1. we have to find a matching station for our origin,
+    # 2. then find a matching station for our destination
+    # these connections have already been declared in our @@routes[:connections] hash
+
+    # out of the unique origin connections, are there any lines that connect out of those key/value pairs,
+
+
+    # ——————————————————————————————————————————————————
+    binding.pry
+    # ——————————————————————————————————————————————————
+
+
+
+    matched_connections.length > 0 ? set_direct_connection(origin, destination) : set_connecting_route()
+
+  end
+
+  # helper method to turn the @@routes keys to strings
   def get_route_name(array)
     @@routes.key(array).to_s
   end
 
   def get_route_line(station)
-    #=> need to check for more than one connection; arrays in array? or new hash?
-    # the problem is that a destination line like South Station returns the last value => Silver Line; not optimal
-    line = []
-    @@routes.each_pair { |key,value| value.include?(station) ? line = value.map{ |value| value } : false }
-    return line
+    lines = {}
+    @@routes.each_pair { |key,value| value.include?(station) ? lines.store(key, value) : false }
+    return lines
   end
 
-  def route(origin,origin_line_name,origin_line,destination,destination_line_name,destination_line)
-    if origin == destination
-      result = "You want to get on and off at the same location? Doesn't sound like much of a trip to me..."
-    elsif origin_line == destination_line
-      result = "Get on the #{origin_line_name} line, ride it for #{(destination_line.index(destination)-origin_line.index(origin)).abs} stops, and get off at #{destination}"
-    elsif origin_line != destination_line
+  def set_single_line(origin, destination, single_line_hash)
+    # if single_line_hash has more than one key/value pair, it means that multiple train lines can get you to where you're going without changing lines
+    puts "you don't have to change trains"
+  end
 
-      # I need to check the connections key hash for the connections. The connections key hash declares connection lines at the stations (keys), so if both the origin_line and the destination_line are in the same connection, I can use that station key as the connection
-      origin_connections = []
-      dest_connections = []
-      @@routes[:connections].each_pair { |key, value| value.include?(origin_line_name.to_sym) ? origin_connections << key : false }
-      @@routes[:connections].each_pair { |key, value| value.include?(destination_line_name.to_sym) ? dest_connections << key : false }
+  def set_direct_connection(origin,destination)
+    puts "you have to change lines once"
+  end
 
-      # this will give us the connections of the origins and destinations in the form of an array.
-      # it is possible that this array will not have a length, which means that you must change lines to get to where you want to go.
-      combined_connections = origin_connections & dest_connections
-      stringified_connections = combined_connections.map { |connection| connection.to_s.gsub!(/[_]/, " ") }
-      stringified_connections.map! { |connection_string| connection_string.split.map!(&:capitalize)*' ' }
-
-      binding.pry
-
-      # if there's more than one way to make the connection, I need to find the connection with the least amount of stops
-      # if two routes have the same amount of stops, i want to know that
-
-    else
-      directions("else is happening")
-    end
-
-    # (origin_line.index(origin) - origin_line.index(stringified_connections[1])).abs + (destination_line.index(destination) - destination_line.index(stringified_connections[1])).abs
-    # if origin_line_name and destination_line_name are the same, calculate the distance between each index
-    # if origin and destination lines are different loop through each line array, search for the same items, that's where the connection needs to happen
-    # what if there's no connection to these lines? we need to find connections in one of the other lines through the connections key with the least stops
-    directions(result)
+  def set_connecting_route()
+    puts "you have to change lines more than once"
   end
 
   def directions(result)
@@ -106,34 +146,3 @@ end
 
 puts "Enter: departure station, arrival station"
 TeeRouter.new(gets.chomp)
-
-
-
-
-
-
-
-
-
-
-
-
-# this is not scalable because it hard-references Park Street as the connection, which might not always be the case
-    # origin_line.index(origin) > origin_line.index("Park Street") ? origin_line_stops_to_get_off = origin_line[origin_line.index("Park Street")..origin_line.index(origin)].length - 1 : origin_line_stops_to_get_off = origin_line[origin_line.index(origin)..origin_line.index("Park Street")].length - 1
-    # destination_line.index(destination) > destination_line.index("Park Street") ? destination_line_stops_to_get_off = destination_line[destination_line.index("Park Street")..destination_line.index(destination)].length - 1 : destination_line_stops_to_get_off = destination_line[destination_line.index(destination)..destination_line.index("Park Street")].length - 1
-
-    # if origin == destination
-    #   result = "You want to get on and off at the same location? Doesn't sound like much of a trip to me..."
-    #   directions(result)
-    # elsif line1 == line2
-    #   result = "Get on the #{line1name} line, ride it for #{line2.index(destination)-line1.index(origin)} stops, and get off at #{line2name}"
-    #   directions(result)
-    # elsif line1 != line2
-    #   # TODO: Add an inbound/outbound flag to the route
-    #   line1.index(origin) > line1.index("Park Street") ? line1_stops_to_get_off = line1[line1.index("Park Street")..line1.index(origin)].length - 1 : line1_stops_to_get_off = line1[line1.index(origin)..line1.index("Park Street")].length - 1
-    #   line2.index(destination) > line2.index("Park Street") ? line2_stops_to_get_off = line2[line2.index("Park Street")..line2.index(destination)].length - 1 : line2_stops_to_get_off = line2[line2.index(destination)..line2.index("Park Street")].length - 1
-    #   result = "Get on the #{line1name} line at #{origin}, ride it for #{line1_stops_to_get_off} stops and get off at Park Street, change to the #{line2name} line, and ride it for #{line2_stops_to_get_off} stops towards #{destination}. You will have arrived at your destination."
-    #   directions(result)
-    # else
-    #   result = "Something else happened"
-    # end
