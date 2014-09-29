@@ -242,7 +242,7 @@ class TeeRouter
 
 end
 
-puts "\n\n\nTeeRouter find your connections on the MBTA.\nTry it: departure station, arrival station\n"
+puts "\n\n\nTeeRouter finds your connections on the MBTA.\nTry it: departure station, arrival station\n"
 TeeRouter.new(gets.chomp)
 
 
