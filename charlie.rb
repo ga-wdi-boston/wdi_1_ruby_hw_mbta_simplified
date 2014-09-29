@@ -1,11 +1,6 @@
-# # Program can find the distance between two stops on the same line
-# # Program can find the distance between two stops on different lines
-# # Program gives the correct distance in edge cases (e.g. route starts and ends at the same stop, route starts or ends at Park Street)
-# # Stops and lines can be added, removed, or rearranged in your code without making any changes to the route-finding logic (within reason – every line must intersect at a single common stop)
-
-
 require 'pry'
 
+# Here is the map of the MBTA
 
 t_lines = {
           red: [
@@ -13,7 +8,7 @@ t_lines = {
             "davis",
             "porter",
             "harvard",
-            "kentral",
+            "central",
             "kendall/mit",
             "park street",
             "south station"
@@ -36,22 +31,15 @@ t_lines = {
             "tufts medical center"
             ]
         }
-# end
 
-# Get user input
+# The next four methods get user input:
+
 def get_origin_line
 
   puts "I'll tell you how to go where you want to go on the MBTA!"
   puts "On which line will you originate? \n -Red \n -Orange \n -Green"
   origin_line = gets.chomp.downcase.to_sym
 
-  # Error checking
-  # if origin_line != (:red || :orange || :green)
-  #   puts "Please choose Red, Orange, or Green"
-  #   quit(0)
-  # else
-  #   origin_line
-  # end
 end
 
 def get_origin_stop
@@ -66,14 +54,6 @@ def get_destination_line
   puts "On which line is your destination? \n -Red \n -Orange \n -Green"
   destination_line = gets.chomp.downcase.to_sym
 
-  # Error checking
-  # if destination_line != (:red || :orange || :green)
-  #   puts "Please choose Red, Orange, or Green"
-  #   quit(0)
-  # else
-  #   destination_line
-  # end
-
 end
 
 def get_destination_stop
@@ -83,31 +63,38 @@ def get_destination_stop
   destination_stop = gets.chomp.downcase
 end
 
+# Computation occurs in this method:
+
 def line_logic(subway_map,origin_line,origin_stop,destination_line,destination_stop)
 
-  # This gets us from our origin to Park Street
+  if origin_line == destination_line
 
-  part1 = (subway_map[origin_line].index("park street") - subway_map[origin_line].index(origin_stop)).abs
+    # If origin and destination are on the same line:
 
-  # This gets us from Park St to destination
-  part2 = (subway_map[destination_line].index("park street") - subway_map[destination_line].index(destination_stop)).abs
+    number_of_stops = (subway_map[origin_line].index(origin_stop) - subway_map[destination_line].index(destination_stop)).abs
 
-  number_of_stops = part1 + part2
+  else
+    # If origin and destination are on different lines
+    # This gets the rider from the origin to Park Street:
 
-  "Traveling from #{origin_stop.capitalize} on the #{origin_line.capitalize} line to #{destination_stop.capitalize} on the #{destination_line.capitalize} line will take #{number_of_stops} stops."
+    part1 = (subway_map[origin_line].index("park street") - subway_map[origin_line].index(origin_stop)).abs
+
+    # This gets the rider from Park Street to the destination:
+    part2 = (subway_map[destination_line].index("park street") - subway_map[destination_line].index(destination_stop)).abs
+
+    number_of_stops = part1 + part2
+
+  end
+
+end
+
+# This displays the result to user:
+
+def display_result(number_of_stops)
+
+  puts "Your Journey will take #{number_of_stops} stops."
 
 end
 
 
-# Display result to user
-def display_result(origin_line,origin_stop,destination_line,destination_stop,number_of_stops)
-
-  puts "Your Journey:"
-  puts "Traveling from #{origin_stop} on the #{origin_line} line go to #{destination_stop} on the #{destination_line }will take #{number_of_stops} stops."
-end
-
-#program
-
-
-puts line_logic(t_lines,get_origin_line,get_origin_stop,get_destination_line, get_destination_stop)
-# puts display_result
+display_result(line_logic(t_lines,get_origin_line,get_origin_stop,get_destination_line,get_destination_stop))
