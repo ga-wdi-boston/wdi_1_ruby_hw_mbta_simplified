@@ -38,7 +38,7 @@ class TeeRouter
     good = array.length == 2 ? get_stations(array) :  directions("Invalid arrival and destination.")
   end
 
-  # convert the array of items into an origin and destination readable by ruby
+  # converts the array of items into an origin and destination readable by ruby
   def get_stations(array)
     origin = array[0].scan(/\b[a-z][\w\s\/]+/i)[0].split.map(&:capitalize)*' '
     destination = array[1].scan(/\b[a-z][\w\s\/]+/i)[0].split.map(&:capitalize)*' '
@@ -118,6 +118,12 @@ class TeeRouter
   # meat and potatoes.
   def route(origin, destination, origin_lines, destination_lines, common_unique_connections, uncommon_unique_connections, uncommon_unique_symbols)
 
+    if origin == destination
+      result = "Just walk. Don't be lazy."
+      directions(result)
+      return
+    end
+
     # are the origin and destination on the same line?
     on_same_line = false
     origin_lines.each_pair { |ok,ov|
@@ -164,19 +170,18 @@ class TeeRouter
 
         origin_stops = []
         num_origin_to_connection_stops.each_pair { |k, v| origin_stops << v }
-        shortest_origin_to_connect_stops = num_origin_to_connection_stops.select {|k,v| v == origin_stops.min }
+        shortest_origin_to_connect_stops = num_origin_to_connection_stops.select {|k,v| v == origin_stops.min || v == (origin_stops.min) + 1 }
         dest_stops = []
         num_connection_to_destination_stops.each_pair { |k,v| dest_stops << v }
-        shortest_connect_to_dest_stops = num_connection_to_destination_stops.select { |k,v| v == dest_stops.min }
+        shortest_connect_to_dest_stops = num_connection_to_destination_stops.select { |k,v| v == dest_stops.min || v == (dest_stops.min) + 1 }
 
-        # TODO: Set the return values of these blocks to an array or key, then read the steps back in order.
-        shortest_origin_to_connect_stops.each_pair { |ok,ov|
-            shortest_connect_to_dest_stops.each_pair { |dk, dv|
+        # TODO: Push these blocks out into their own method. Repetitive
+        shortest_origin_to_connect_stops.each_pair { |ok,ov| #=>  for state {"Haymarket"=>1, "North Station"=>2, "Government Center"=>1}
+            shortest_connect_to_dest_stops.each_pair { |dk, dv| #=> for lechmere {"North Station"=>2}
               line_to_take = origin_to_connection_lines.map { |line| line.include?(ok) ? line[-1] : nil }.compact
               dk == ok ? dir_origin_to_connection << "Take #{origin} to #{ok} on the #{line_to_take.length > 1 ? stringify_line_array(line_to_take).join(", ") : stringify_line_array(line_to_take).join("")} for #{ov} stop(s)\n" : false
             }
         }
-
         # TODO: Set the return values of these block to an array or key, then read the steps back in order.
         shortest_connect_to_dest_stops.each_pair { |dk,dv|
           shortest_origin_to_connect_stops.each_pair { |ok,ov|
@@ -211,8 +216,8 @@ class TeeRouter
 
   # does the opposite of above
   def convert_to_connection_string(key)
-    string = key.to_s =~ /[A-Z]{1}\b/ ? key.to_s.insert(key.to_s =~ /[A-Z]{1}\b/, " ").capitalize : key.to_s.capitalize
-    string.to_s =~ /[_]/ ? string.to_s.gsub!(/[_]/, " ").split.map(&:capitalize)*' ' : string.to_s.capitalize
+    # string = key.to_s =~ /[A-Z]{1}\b/ ? key.to_s.insert(key.to_s =~ /[A-Z]{1}\b/, " ").capitalize : key.to_s.capitalize
+    key.to_s =~ /[_]/ ? key.to_s.gsub!(/[_]/, " ").split.map(&:capitalize)*' ' : key.to_s.capitalize
     #=> this has undesired effects on renaming conventions, messing up the logic
     # ————————————————————
     # key.to_s =~ /[A-Z]{1}\b/ ? key.to_s.insert(key =~ /[A-Z]{1}\b/, " ").split.map(&:capitalize)*' ' : key.to_s.capitalize
