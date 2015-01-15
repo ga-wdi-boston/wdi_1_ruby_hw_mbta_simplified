@@ -1,14 +1,3 @@
-#"What station are you starting from?"
-#start_stop = gets().chomp()
-
-#"What T line is that?"
-#start_line = gets().chomp()
-
-#"What station do you need to reach?"
-#end_station = gets().chomp()
-
-#"What line is that?"
-#end_sline = gets().chomp()
 stops = {
 
 "red" => {
