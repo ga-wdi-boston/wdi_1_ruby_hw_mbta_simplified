@@ -1,3 +1,5 @@
+#A program to calculate the number of stops between two stations on the MBTA
+#A hash where each line is the key to an array of stations
 mbta_lines = {
   red_line:
     [
@@ -29,10 +31,11 @@ mbta_lines = {
     "chinatown",
     "tuftsmedicalcenter"
     ]
- }
+   }
 
 line_options = [:red_line, :green_line, :orange_line]
 
+#Asks user for origin and destination and will continue asking until a valid response is given.
 origin_line = ""
 until line_options.include? origin_line do
   print "Please choose your origin line: "
@@ -57,6 +60,8 @@ until mbta_lines[destination_line].include?(destination_stop) do
   destination_stop = gets.downcase.delete(" ").delete("/").chomp
 end
 
+
+#Calculates the number of stops needed to travel and catches edge cases.
 stops_to_travel = 0
 if origin_line == destination_line
   if origin_stop == destination_stop
