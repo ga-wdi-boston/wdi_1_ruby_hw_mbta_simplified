@@ -60,14 +60,22 @@ def dist_on_line(stop_index_a, stop_index_b)
   (stop_index_a - stop_index_b).abs
 end
 
+
+def dist_to_vortex(stop_index, vortex, stops)
+  dist_on_line(stops.index(vortex), stop_index)  
+end
+
 origin = get_stop("origin", mbtamap)
 destination = get_stop("destination", mbtamap)
 
 if origin[:line] == destination[:line]
   dist = dist_on_line(origin[:stop_index], destination[:stop_index])
-  puts "The number of stops for your journey is #{dist}"
+else
+  dist = dist_to_vortex(origin[:stop_index], vortex, mbtamap[origin[:line]])
+  dist += dist_to_vortex(destination[:stop_index], vortex, mbtamap[destination[:line]])
 end
 
+puts "The number of stops for your trip is #{dist}"
 
 
 
