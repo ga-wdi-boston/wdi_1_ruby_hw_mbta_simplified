@@ -27,6 +27,22 @@ mbtamap = {
     "Tufts Medical Center"
   ]
 }
+lines = mbtamap.keys
 
-puts mbtamap.keys
-puts mbtamap["Red Line"]
+def prompt_menu(title, options)
+  puts title
+  options.each_with_index do |option, index|
+    puts "#{index + 1} - #{option}" 
+  end
+  while true
+    user_input = gets.chomp.to_i
+    if user_input > 0 && user_input <= options.count
+      return user_input - 1
+    end
+    puts "Not a valid option, try again"
+  end
+end
+puts prompt_menu "Pick a line", lines
+
+
+
