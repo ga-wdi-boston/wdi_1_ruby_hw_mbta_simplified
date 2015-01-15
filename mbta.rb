@@ -27,7 +27,6 @@ mbtamap = {
     "Tufts Medical Center"
   ]
 }
-lines = mbtamap.keys
 
 def prompt_menu(title, options)
   puts title
@@ -42,7 +41,24 @@ def prompt_menu(title, options)
     puts "Not a valid option, try again"
   end
 end
-puts prompt_menu "Pick a line", lines
+
+def get_stop(dir, mbtamap)
+  line = prompt_menu "Enter #{dir} line", mbtamap.keys
+  line_name = mbtamap.keys[line]
+  stops = mbtamap[line_name]
+  stop = prompt_menu "Enter #{dir} stop", stops
+  return {
+    line: line_name,
+    stop: stops[stop],
+    stop_index: stop
+  } 
+end
+
+origin = get_stop("origin", mbtamap)
+destination = get_stop("destination", mbtamap)
+
+
+
 
 
 
