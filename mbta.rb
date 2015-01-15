@@ -1,34 +1,34 @@
 mbta_lines = {
   red_line:
-    {
-      alewife: 6,
-      davis: 5,
-      porter: 4,
-      harvard: 3,
-      central: 2,
-      kendallmit: 1,
-      parkstreet: 0,
-      southstation: 1,
-    } ,
+    [
+      "alewife",
+      "davis",
+      "porter",
+      "harvard",
+      "central",
+      "kendallmit",
+      "parkstreet",
+      "southstation",
+    ] ,
   green_line:
-    {
-    haymarket: 2,
-    governmentcenter: 1,
-    parkstreet: 0,
-    boylston: 1,
-    arlington: 2,
-    copley: 3
-    } ,
+    [
+    "haymarket",
+    "governmentcenter",
+    "parkstreet",
+    "boylston",
+    "arlington",
+    "copley"
+    ] ,
   orange_line:
-    {
-    northstation: 2,
-    haymarket: 1,
-    parkstreet: 0,
-    statestreet: 1,
-    downtowncrossing: 2,
-    chinatown: 3,
-    tuftsmedicalcenter: 4
-    }
+    [
+    "northstation",
+    "haymarket",
+    "parkstreet",
+    "statestreet",
+    "downtowncrossing",
+    "chinatown",
+    "tuftsmedicalcenter"
+    ]
  }
 
 line_options = [:red_line, :green_line, :orange_line]
@@ -40,9 +40,9 @@ until line_options.include? origin_line do
 end
 
 origin_stop = ""
-until mbta_lines[origin_line].has_key?(origin_stop) do
+until mbta_lines[origin_line].include?(origin_stop) do
   print "Please choose your origin station: "
-  origin_stop = gets.downcase.delete(" ").delete("/").chomp.to_sym
+  origin_stop = gets.downcase.delete(" ").delete("/").chomp
 end
 
 destination_line = ""
@@ -52,7 +52,20 @@ until line_options.include? destination_line do
 end
 
 destination_stop = ""
-until mbta_lines[destination_line].has_key?(destination_stop) do
+until mbta_lines[destination_line].include?(destination_stop) do
   print "Please choose your destination station: "
-  destination_stop = gets.downcase.delete(" ").delete("/").chomp.to_sym
+  destination_stop = gets.downcase.delete(" ").delete("/").chomp
+end
+
+stops_to_travel = 0
+if origin_line == destination_line
+  if origin_stop == destination_stop
+    puts "You're already there!"
+  else
+   stops_to_travel = (mbta_lines[origin_line].index(origin_stop) - mbta_lines[destination_line].index(destination_stop))
+   puts "You have to travel #{stops_to_travel.abs} stops."
+  end
+else
+  stops_to_travel = (mbta_lines[origin_line].index(origin_stop) - mbta_lines[origin_line].index("parkstreet")).abs + (mbta_lines[destination_line].index(destination_stop) - mbta_lines[destination_line].index("parkstreet")).abs
+  puts "You have to travel #{stops_to_travel} stops."
 end
