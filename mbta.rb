@@ -43,7 +43,11 @@ destination_line = gets.chomp.downcase
 puts "Which stop is your destination at?"
 destination_stop = gets.chomp.downcase
 
-stop_number = stations[origin_line][origin_stop].abs + stations[destination_line][destination_stop].abs
+if origin_line == destination_line
+  stop_number = (stations[origin_line][origin_stop] - stations[destination_line][destination_stop]).abs
+else
+  stop_number = stations[origin_line][origin_stop].abs + stations[destination_line][destination_stop].abs
+end
 
 puts "You have to go #{stop_number} stops to reach your destination."
 
