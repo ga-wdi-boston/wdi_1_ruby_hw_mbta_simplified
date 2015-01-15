@@ -2,13 +2,13 @@ def distance_lines(starting_line, starting_stop, ending_line, ending_stop)
 
   mbta = {
     "red" => {
-      "alewife" => 6, "davis" => 5, "porter" => 4, "harvard" => 3, "central" => 2, "kendall" => 1, "park_st" => 0, "south_st" => -1
+      "alewife" => 6, "davis" => 5, "porter" => 4, "harvard" => 3, "central" => 2, "kendall" => 1, "park st" => 0, "south st" => -1
     },
     "green" => {
-      "haymarket_g" => 2, "government_center" => 1, "park_st" => 0, "boylston" => -1, "arlington" => -2, "copley" => -3
+      "haymarket g" => 2, "government center" => 1, "park st" => 0, "boylston" => -1, "arlington" => -2, "copley" => -3
     },
     "orange" => {
-      "north_station" => 2, "haymarket_o" => 1, "park_st" => 0, "state_st" => -1, "downtown_crossing" => -2, "chinatown" => -3, "tufts_med_ctr" => -4
+      "north station" => 2, "haymarket o" => 1, "park st" => 0, "state st" => -1, "downtown crossing" => -2, "chinatown" => -3, "tufts med ctr" => -4
     }
   }
 
@@ -20,17 +20,17 @@ def distance_lines(starting_line, starting_stop, ending_line, ending_stop)
 
 end
 
-mbta = {
-  "red" => {
-    "alewife" => 6, "davis" => 5, "porter" => 4, "harvard" => 3, "central" => 2, "kendall" => 1, "park_st" => 0, "south_st" => -1
-  },
-  "green" => {
-    "haymarket_g" => 2, "government_center" => 1, "park_st" => 0, "boylston" => -1, "arlington" => -2, "copley" => -3
-  },
-  "orange" => {
-    "north_station" => 2, "haymarket_o" => 1, "park_st" => 0, "state_st" => -1, "downtown_crossing" => -2, "chinatown" => -3, "tufts_med_ctr" => -4
+  mbta = {
+    "red" => {
+      "alewife" => 6, "davis" => 5, "porter" => 4, "harvard" => 3, "central" => 2, "kendall" => 1, "park st" => 0, "south st" => -1
+    },
+    "green" => {
+      "haymarket g" => 2, "government center" => 1, "park st" => 0, "boylston" => -1, "arlington" => -2, "copley" => -3
+    },
+    "orange" => {
+      "north station" => 2, "haymarket o" => 1, "park st" => 0, "state st" => -1, "downtown crossing" => -2, "chinatown" => -3, "tufts med ctr" => -4
+    }
   }
-}
 
 puts "Pay close attention. You must pick out the correct information that is given below"
 puts "These are the red line stops #{mbta["red"]}"
