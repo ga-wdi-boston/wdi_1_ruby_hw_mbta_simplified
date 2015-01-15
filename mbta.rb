@@ -45,3 +45,19 @@ def calc_stops(system, origin_line, origin, destination_line, destination)
     calc_index_distance(system[origin_line][:stations], origin, "Park Street") + calc_index_distance(system[destination_line][:stations], destination, "Park Street")
   end
 end
+
+puts "What line are you leaving from?"
+origin_line = gets.chomp.to_sym
+
+puts "What station are you leaving from?"
+origin_stop = gets.chomp
+
+puts "On what line is your destination?"
+destination_line = gets.chomp.to_sym
+
+puts "What is your destination station?"
+destination_stop = gets.chomp
+
+stops = calc_stops(mbta, origin_line, origin_stop, destination_line, destination_stop)
+
+puts "Your destination is #{stops} stop#{ stops == 1 ? "" : "s" } away."
