@@ -28,6 +28,8 @@ mbtamap = {
   ]
 }
 
+vortex = "Park Street"
+
 def prompt_menu(title, options)
   puts title
   options.each_with_index do |option, index|
@@ -54,8 +56,17 @@ def get_stop(dir, mbtamap)
   } 
 end
 
+def dist_on_line(stop_index_a, stop_index_b)
+  (stop_index_a - stop_index_b).abs
+end
+
 origin = get_stop("origin", mbtamap)
 destination = get_stop("destination", mbtamap)
+
+if origin[:line] == destination[:line]
+  dist = dist_on_line(origin[:stop_index], destination[:stop_index])
+  puts "The number of stops for your journey is #{dist}"
+end
 
 
 
