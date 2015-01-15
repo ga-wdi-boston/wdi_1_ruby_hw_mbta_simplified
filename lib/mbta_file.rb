@@ -13,9 +13,9 @@ def distance_lines(starting_line, starting_stop, ending_line, ending_stop)
   }
 
     if starting_line == ending_line
-      return (mbta[starting_line][starting_stop] - mbta[ending_line][ending_stop])
+      return (mbta[starting_line][starting_stop] - mbta[ending_line][ending_stop]).abs
     else
-      return (mbta[starting_line][starting_stop] - mbta[ending_line][ending_stop])
+      return (mbta[starting_line][starting_stop] - mbta[ending_line][ending_stop]).abs
     end
 
 end
