@@ -33,3 +33,7 @@ mbta = {
           ]
         }
 }
+
+def calc_index_distance(array, index_a, index_b)
+  ( array.index(index_a) - array.index(index_b) ).abs
+end
