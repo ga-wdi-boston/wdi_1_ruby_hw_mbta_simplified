@@ -1,29 +1,52 @@
-def numStop(oriLine, oriStop, destLine, destStop)
-theT = {
-  "Red" => {
-    "Alewife" => 6, "Davis" => 5, "Porter" => 4, "Harvard" => 3, "Central" => 2, "Kendall/MIT" => 1, "Park Street" => 0, "South Station" => -1
-  },
-  "Green" => {
-    "Haymarket" => 2, "Government Center" => 1, "Park Street" => 0, "Boylston" => -1, "Arlington" => -2, "Copley" => -3
-  },
-  "Orange" => {
-    "North Station" => 2, "Haymarket" => 1, "Park Street" => 0, "State Street" => -1, "Downtown Crossing" => -2, "Chinatown" => -3, "Tufts Medical Center" => -4
+class Trip
+  MBTA = {
+    "Red" => [
+      "Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall/MIT", "Park Street", "South Station"
+    ],
+    "Green" => [
+      "Haymarket", "Government Center", "Park Street", "Boylston", "Arlington", "Copley"
+    ],
+    "Orange" => [
+      "North Station", "Haymarket", "Park Street", "State Street", "Downtown Crossing", "Chinatown", "Tufts Medical Center"
+    ]
   }
-}
 
-  if oriLine == destLine
-    return (theT[oriLine][oriStop] - theT[destLine][destStop]).abs
-  else
-    return (theT[oriLine][oriStop] - theT[destLine][destStop]).abs
+  def initialize(oriLine:, oriStop:, destLine:, destStop:)
+    @oriLine = oriLine
+    @oriStop = oriStop
+    @destLine = destLine
+    @destStop = destStop
+  end
+
+  def oriLine
+    @oriLine
+  end
+
+  def oriStop
+    @oriStop
+  end
+
+  def destLine
+    @destLine
+  end
+
+  def destStop
+    @destStop
+  end
+
+  def transfer?
+    oriLine == destLine
+  end
+
+  def numStop
+    if oriLine == destLine
+      (Trip::MBTA[oriLine].index(oriStop) - Trip::MBTA[destLine].index(destStop)).abs
+    else
+      (Trip::MBTA[oriLine].index(oriStop) - Trip::MBTA[oriLine].index("Park Street")).abs +
+      (Trip::MBTA[destLine].index(destStop) - Trip::MBTA[destLine].index("Park Street")).abs
+    end
   end
 end
 
-puts "What line are you starting on? (Red, Green, Orange)"
-oriLine = gets.chomp
-puts "What station are you starting on?"
-oriStop = gets.chomp
-puts "What line are you ending on? (Red, Green, Orange)"
-destLine = gets.chomp
-puts "What station are you ending on?"
-destStop = gets.chomp
-puts numStop(oriLine, oriStop, destLine, destStop)
+trip = Trip.new(oriLine: "Red", oriStop: "Harvard", destLine: "Green", destStop: "Haymarket")
+puts trip.numStop
